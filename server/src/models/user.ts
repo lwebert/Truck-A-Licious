@@ -29,6 +29,7 @@ export class User
   }
 }
 
+//TODO: add user type to model
 export function UserFactory(sequelize: Sequelize): typeof User {
   User.init(
     {
