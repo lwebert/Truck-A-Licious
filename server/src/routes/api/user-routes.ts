@@ -44,6 +44,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
+//TODO: PUT and DELETE routes are extra/optional
 // PUT /users/:id - Update a user by id
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
