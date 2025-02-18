@@ -13,8 +13,8 @@ interface FoodtruckAttributes {
 	foodtruckName: string;
 	cuisine: string;
 	zipCode: number;
-	startDate: Date;
-	endDate: Date;
+	startDate: string;
+	endDate: string;
 }
 
 interface FoodTruckCreationAttributes
@@ -28,8 +28,8 @@ export class Foodtruck
 	public foodtruckName!: string;
 	public cuisine!: string;
 	public zipCode!: number;
-	public startDate!: Date;
-	public endDate!: Date;
+	public startDate!: string;
+	public endDate!: string;
 
 	declare userId: ForeignKey<User['id']>;
 
@@ -49,27 +49,40 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 			foodtruckName: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				unique: true,
 			},
 			cuisine: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			zipCode: {
-				type: DataTypes.NUMBER,
+				type: DataTypes.INTEGER,
 				allowNull: false,
+				validate: {
+					min: 23,
+				},
 			},
 			startDate: {
-				type: DataTypes.DATE,
+				type: DataTypes.STRING,
 				allowNull: false,
+                validate: {
+                    // isAfter: Foodtruck.createdAt,
+                    isDate: true,
+                }
 			},
 			endDate: {
-				type: DataTypes.DATE,
+				type: DataTypes.STRING,
 				allowNull: false,
+                validate: {
+                    // isAfter: startDate,
+                    isDate: true,
+                }
 			},
 		},
 		{
 			tableName: 'foodtrucks',
 			sequelize,
+			// timestamps: false,
 		}
 	);
 
