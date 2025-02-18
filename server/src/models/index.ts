@@ -10,4 +10,4 @@ User.hasOne(Foodtruck, {
 });
 Foodtruck.belongsTo(User);
 
-export { User };
+export { User, Foodtruck };
