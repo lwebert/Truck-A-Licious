@@ -24,29 +24,29 @@ const login = async (userInfo: UserLogin) => {
 };
 
 
-const getUserRole = async () => {
-  try {
-    const response = await fetch('/auth/role', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+// const getUserRole = async () => {
+//   try {
+//     const response = await fetch('/auth/role', {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error('User role not retrieved, check network tab!');
-    }
+//     if (!response.ok) {
+//       throw new Error('User role not retrieved, check network tab!');
+//     }
 
-    return data.role;
-  } catch (err) {
-    console.log('Error from user role: ', err);
-    return Promise.reject('Could not fetch user role');
-  }
-};
+//     return data.role;
+//   } catch (err) {
+//     console.log('Error from user role: ', err);
+//     return Promise.reject('Could not fetch user role');
+//   }
+// };
 
-export { login, getUserRole };
+
 const signup = async (userInfo: UserLogin) => {
   try {
     const response = await fetch('/auth/signup', {
