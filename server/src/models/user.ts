@@ -32,7 +32,6 @@ export class User
 	}
 }
 
-<<<<<<
 export function UserFactory(sequelize: Sequelize): typeof User {
 	User.init(
 		{
