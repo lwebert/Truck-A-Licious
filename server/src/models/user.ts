@@ -1,6 +1,7 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 
+
 interface UserAttributes {
 	id: number;
 	username: string;
@@ -31,7 +32,7 @@ export class User
 	}
 }
 
-//TODO: add user type to model
+<<<<<<
 export function UserFactory(sequelize: Sequelize): typeof User {
 	User.init(
 		{
