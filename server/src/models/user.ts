@@ -1,6 +1,7 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 
+
 interface UserAttributes {
   id: number;
   username: string;
@@ -28,6 +29,8 @@ export class User
     this.password = await bcrypt.hash(password, saltRounds);
   }
 }
+
+
 
 export function UserFactory(sequelize: Sequelize): typeof User {
   User.init(

@@ -23,4 +23,26 @@ const login = async (userInfo: UserLogin) => {
   }
 };
 
-export { login };
+const getUserRole = async () => {
+  try {
+    const response = await fetch('/auth/role', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error('User role not retrieved, check network tab!');
+    }
+
+    return data.role;
+  } catch (err) {
+    console.log('Error from user role: ', err);
+    return Promise.reject('Could not fetch user role');
+  }
+};
+
+export { login, getUserRole };
