@@ -1,6 +1,13 @@
 import sequelize from '../config/connection.js';
 import { UserFactory } from './user.js';
+import { FoodtruckFactory } from './foodtruck.js';
 
 const User = UserFactory(sequelize);
+const Foodtruck = FoodtruckFactory(sequelize);
 
-export { User };
+User.hasOne(Foodtruck, {
+	onDelete: 'CASCADE',
+});
+Foodtruck.belongsTo(User);
+
+export { User, Foodtruck };
