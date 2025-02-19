@@ -4,6 +4,7 @@ import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from '../components/Users';
 import auth from '../utils/auth';
+//TODO: customize the home page - have 2 separate pages depending on if user or owner
 
 const Home = () => {
 
@@ -23,6 +24,7 @@ const Home = () => {
 
     const checkLogin = () => {
         if (auth.loggedIn()) {
+            console.log('logged in!');
             setLoginCheck(true);
         }
     };
