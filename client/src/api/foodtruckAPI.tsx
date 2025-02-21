@@ -14,7 +14,7 @@ const retrieveOwnerFoodtruck = async (
 	id: number | null
 ): Promise<FoodtruckData> => {
 	try {
-		const response = await fetch(`api/volunteers/${id}`, {
+		const response = await fetch(`api/foodtrucks/${id}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},

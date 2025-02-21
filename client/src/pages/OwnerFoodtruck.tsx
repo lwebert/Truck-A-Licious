@@ -1,51 +1,61 @@
-// import { useState } from 'react';
-// import { FormEvent, useState } from 'react';
-// import {
-// 	retrieveOwnerFoodtruck,
-// 	createOwnerFoodtruck,
-// } from '../api/foodtruckAPI';
-// import DatePicker from 'react-datepicker';
-// import FoodtruckData from '../interfaces/FoodtruckData';
+import { useEffect, useState } from 'react';
 
-const NewFoodtruck = () => {
-	// const [newFoodtruck, setNewFoodtruck] = useState<FoodtruckData | undefined>({
-	// 	id: null,
-	// 	foodtruckName: '',
-	// 	cuisine: '',
-	// 	menuImg: '',
-	// 	description: '',
-	// 	zipCode: null,
-	// 	startDate: new Date(),
-	// 	endDate: new Date(),
-	// });
+import { retrieveUsers } from '../api/userAPI';
 
-	// const createNewFoodtruck = async (body: FoodtruckData) => {
-	// 	try {
-	// 		const foodtruckdata = await createOwnerFoodtruck(body);
-	// 		return foodtruckdata;
-	// 	} catch (err) {
-	// 		console.error('Failed to create new foodtruck', err);
-	// 	}
-	// };
+import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
-	// const handleSubmit = async (event: FormEvent) => {
-	// 	event.preventDefault();
-	// 	if (newFoodtruck) {
-	// 		const data = createNewFoodtruck(newFoodtruck);
-	// 		console.log(data);
-	// 	}
-	// };
+import FoodtruckData from '../interfaces/FoodtruckData';
+import FoodtruckForm from '../components/FoodtruckForm';
+import FoodtruckDisplay from '../components/FoodtruckDisplay';
+
+const OwnerFoodtruck = () => {
+	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
+	const [userId, setUserId] = useState<string>('');
+
+	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>({
+		id: null,
+		foodtruckName: '',
+		cuisine: '',
+		menuImg: '',
+		description: '',
+		zipCode: null,
+		startDate: new Date(),
+		endDate: new Date(),
+	});
+
+	useEffect(() => {
+		const initialize = async () => {
+			const loggedInUser = await retrieveUsers();
+
+			if (!loggedInUser || !loggedInUser.id) {
+				console.error('Error retrieving logged in user information');
+			}
+
+			const userID = await setUserId(loggedInUser.id);
+			return userID;
+		};
+
+		initialize().then((userID) => {
+			const data = retrieveOwnerFoodtruck(userID);
+
+			if (!data) {
+				setHasFoodtruck(false);
+			}
+
+			setHasFoodtruck(true);
+		});
+	}, []);
 
 	return (
 		<div>
-			{/* <form onSubmit={handleSubmit}>
-				<h1>Add New Foodtruck</h1>
-
-				<label>Foodtruck Name: </label>
-				<input type="text" name="foodtruckName" value={newFoodtruck?.foodtruckName || ''}  onChange={handleChange} />
-			</form> */}
+			{hasFoodtruck ? (
+				<FoodtruckDisplay userId={userId} />
+			) : (
+				<FoodtruckForm />
+			)}
 		</div>
 	);
 };
 
-export default NewFoodtruck;
+//separately make 2 food truck componts - conditionally render
+export default OwnerFoodtruck;
