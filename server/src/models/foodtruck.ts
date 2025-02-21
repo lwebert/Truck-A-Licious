@@ -16,8 +16,10 @@ interface FoodtruckAttributes {
 	description: string;
 	zipCode: number; //then use API to autofill city/state
     //use calendar api wiht dropdown menu - choose dates?
-	startDate: Date;
-	endDate: Date;
+	// startDate: Date;
+	// endDate: Date;	
+    startDate: string;
+	endDate: string;
 
 	//TODO: Output - city, state
 }
@@ -35,8 +37,10 @@ export class Foodtruck
     public menuImg?: string;
 	public description!: string;
 	public zipCode!: number;
-	public startDate!: Date;
-	public endDate!: Date;
+	// public startDate!: Date;
+	// public endDate!: Date;
+    public startDate!: string;
+	public endDate!: string;
 
 	declare userId: ForeignKey<User['id']>;
 
@@ -80,7 +84,8 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				},
 			},
 			startDate: {
-				type: DataTypes.DATE,
+				// type: DataTypes.DATE,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					// isAfter: Foodtruck.createdAt,
@@ -88,7 +93,8 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				},
 			},
 			endDate: {
-				type: DataTypes.DATE,
+				// type: DataTypes.DATE,
+				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					// isAfter: startDate,
