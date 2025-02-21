@@ -12,9 +12,17 @@ interface FoodtruckAttributes {
 	id: number;
 	foodtruckName: string;
 	cuisine: string;
-	zipCode: number;
+	zipCode: number; //then use API to autofill city/state
+
+    //use calendar api wiht dropdown menu - choose dates?
 	startDate: string;
 	endDate: string;
+
+    //TODO: Add description:
+    
+
+    //Output - city, state
+
 }
 
 interface FoodTruckCreationAttributes
