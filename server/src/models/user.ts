@@ -7,7 +7,6 @@ interface UserAttributes {
 	username: string;
 	email: string;
 	password: string;
-	// isFoodTruckOwner: boolean;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -20,12 +19,10 @@ export class User
 	public username!: string;
 	public email!: string;
 	public password!: string;
-	// public isFoodTruckOwner!: boolean;
 
 	public readonly createdAt!: Date;
 	public readonly updatedAt!: Date;
 
-	// Hash the password before saving the user
 	public async setPassword(password: string) {
 		const saltRounds = 10;
 		this.password = await bcrypt.hash(password, saltRounds);
@@ -57,10 +54,6 @@ export function UserFactory(sequelize: Sequelize): typeof User {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			// isFoodTruckOwner: {
-			// 	type: DataTypes.BOOLEAN,
-			// 	allowNull: false,
-			// },
 		},
 		{
 			tableName: 'users',

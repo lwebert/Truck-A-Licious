@@ -12,9 +12,16 @@ interface FoodtruckAttributes {
 	id: number;
 	foodtruckName: string;
 	cuisine: string;
-	zipCode: number;
-	startDate: string;
+    menuImg?: string;
+	description: string;
+	zipCode: number; //then use API to autofill city/state
+    //use calendar api wiht dropdown menu - choose dates?
+	// startDate: Date;
+	// endDate: Date;	
+    startDate: string;
 	endDate: string;
+
+	//TODO: Output - city, state
 }
 
 interface FoodTruckCreationAttributes
@@ -27,8 +34,12 @@ export class Foodtruck
 	public id!: number;
 	public foodtruckName!: string;
 	public cuisine!: string;
+    public menuImg?: string;
+	public description!: string;
 	public zipCode!: number;
-	public startDate!: string;
+	// public startDate!: Date;
+	// public endDate!: Date;
+    public startDate!: string;
 	public endDate!: string;
 
 	declare userId: ForeignKey<User['id']>;
@@ -37,7 +48,6 @@ export class Foodtruck
 	public readonly updatedAt!: Date;
 }
 
-//TODO: add user type to model
 export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 	Foodtruck.init(
 		{
@@ -55,6 +65,17 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+            menuImg: {
+				type: DataTypes.STRING,
+				allowNull: true,
+                validate: {
+                    isUrl: true,
+                }
+			},
+            description: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
 			zipCode: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
@@ -63,20 +84,22 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				},
 			},
 			startDate: {
+				// type: DataTypes.DATE,
 				type: DataTypes.STRING,
 				allowNull: false,
-                validate: {
-                    // isAfter: Foodtruck.createdAt,
-                    isDate: true,
-                }
+				validate: {
+					// isAfter: Foodtruck.createdAt,
+					isDate: true,
+				},
 			},
 			endDate: {
+				// type: DataTypes.DATE,
 				type: DataTypes.STRING,
 				allowNull: false,
-                validate: {
-                    // isAfter: startDate,
-                    isDate: true,
-                }
+				validate: {
+					// isAfter: startDate,
+					isDate: true,
+				},
 			},
 		},
 		{

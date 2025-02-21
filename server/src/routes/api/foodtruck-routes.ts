@@ -39,4 +39,9 @@ router.get('/:zipCode', async (req: Request, res: Response) => {
 });
 
 
+//TODO: POST request to create a foodtruck
+
+
+
+
 export { router as foodtruckRouter };
