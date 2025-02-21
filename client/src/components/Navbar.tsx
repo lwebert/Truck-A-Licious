@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import auth from "../utils/auth";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -12,36 +13,41 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    console.log(loginCheck);
     checkLogin();
   }, [loginCheck]);
 
   return (
-    <div className="display-flex justify-space-between align-center py-2 px-5 mint-green">
-      <h1>Authentication Review</h1>
-      <div>
-        {!loginCheck ? (
-          <>
-            <button className="btn" type="button" style={{marginRight: '10px'}}>
-              <Link to="/signup">Signup</Link>
-            </button>
-            <button className="btn" type="button">
-              <Link to="/login">Login</Link>
-            </button>
-          </>
-        ) : (
-          <button
-            className="btn"
-            type="button"
-            onClick={() => {
-              auth.logout();
-            }}
-          >
-            Logout
-          </button>
-        )}
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">Truekaltelaus</Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            {!loginCheck ? (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/signup">Sign Up</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">Login</Link>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <button
+                  className="btn btn-outline-danger"
+                  type="button"
+                  onClick={() => {
+                    auth.logout();
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

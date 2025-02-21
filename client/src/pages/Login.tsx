@@ -1,7 +1,11 @@
+/* Brandon was here 2/20 */
+
+
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
 import { login } from '../api/authAPI';
 import type { UserLogin } from '../interfaces/UserLogin';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
   const [loginData, setLoginData] = useState<UserLogin>({
@@ -30,35 +34,40 @@ const Login = () => {
   };
 
   return (
-    <div className='form-container'>
-      <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div className='form-group'>
-          <label>Username</label>
-          <input
-            className='form-input'
-            type='text'
-            name='username'
-            value={loginData.username || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label>Password</label>
-          <input
-            className='form-input'
-            type='password'
-            name='password'
-            value={loginData.password || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
-            Login
-          </button>
-        </div>
-      </form>
+    <div className='center-container'> 
+      <div className="card">
+        <h1 className="text-center mb-4">Truekalicious</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username"
+              value={loginData.username || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={loginData.password || ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="d-grid gap-2">
+            <button type="submit" className="btn btn-primary">Login</button>
+          </div>
+          <div className="text-center mt-3">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
