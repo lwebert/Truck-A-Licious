@@ -1,6 +1,6 @@
 //Lauren
 import { useEffect, useState } from 'react';
-import { retrieveUsers } from '../api/userAPI';
+import UsersService from '../utils/users';
 import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
 import FoodtruckData from '../interfaces/FoodtruckData';
@@ -8,46 +8,61 @@ import FoodtruckForm from '../components/FoodtruckForm';
 import FoodtruckDisplay from '../components/FoodtruckDisplay';
 
 const OwnerFoodtruck = () => {
-	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
-	const [userId, setUserId] = useState<string>('');
-	// const [userFoodtruckId, setUserFoodtruckId] = useState<string>('');
+	// const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
+	// const [userId, setUserId] = useState<number | null>(null);
+	// const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
+	// 	undefined
+	// );
 
-	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
-		undefined
-	);
+	// useEffect(() => {
+	// 	const initialize = async () => {
+	// 		// const loggedInUser = await UsersService.getUserIdByEmail();
+	// 		// console.log(loggedInUser);
+	// 		const loggedInUser = 1
 
-	useEffect(() => {
-		const initialize = async () => {
-			const loggedInUser = await retrieveUsers();
+	// 		if (!loggedInUser) {
+	// 			console.error('Error retrieving logged in user information');
+	// 			return;
+	// 		}
+	// 		setUserId(loggedInUser);
 
-			if (!loggedInUser || !loggedInUser.id) {
-				console.error('Error retrieving logged in user information');
-				return;
-			}
+	// 		const foodtruckData = await retrieveOwnerFoodtruck(loggedInUser);
 
-			setUserId(loggedInUser.id);
+	// 		if (!foodtruckData) {
+	// 			setHasFoodtruck(false);
+	// 		} else {
+	// 			setFoodtruck(foodtruckData);
+	// 			setHasFoodtruck(true);
+	// 		}
+	// 	};
 
-			const foodtruckData = await retrieveOwnerFoodtruck(loggedInUser.id);
-			if (!foodtruckData) {
-				setHasFoodtruck(false);
-			} else {
-				setFoodtruck(foodtruckData);
-				setHasFoodtruck(true);
-			}
-		};
+	// 	initialize();
+	// }, []);
 
-		initialize();
-	}, []);
-
-	return (
-		<div>
-			{hasFoodtruck ? (
-				<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
-			) : (
-				<FoodtruckForm />
-			)}
-		</div>
-	);
+	// return (
+	// 	<div>
+	// 		{hasFoodtruck && userId ? (
+	// 			<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
+	// 		) : (
+	// 			<FoodtruckForm />
+	// 		)}
+	// 	</div>
+	// );
+	return <FoodtruckForm />
 };
 
 export default OwnerFoodtruck;
+
+// const profile = AuthService.getProfile();
+// 		if (!profile || !profile.username) {
+// 			throw new Error('Profile not found.');
+// 		}
+// 		const user = await User.findOne({
+// 			where: {
+// 				username: profile.username,
+// 			},
+// 		});
+// 		if (!user) {
+// 			throw new Error('User not found.');
+// 		}
+// 		return user.id;
