@@ -13,17 +13,8 @@ const OwnerFoodtruck = () => {
 	// const [userFoodtruckId, setUserFoodtruckId] = useState<string>('');
 
 	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
-		undefined 
-		// {
-		// id: null,
-		// foodtruckName: '',
-		// cuisine: '',
-		// menuImg: '',
-		// description: '',
-		// zipCode: null,
-		// startDate: new Date(),
-		// endDate: new Date(),}
-		);
+		undefined
+	);
 
 	useEffect(() => {
 		const initialize = async () => {
@@ -39,27 +30,13 @@ const OwnerFoodtruck = () => {
 			const foodtruckData = await retrieveOwnerFoodtruck(loggedInUser.id);
 			if (!foodtruckData) {
 				setHasFoodtruck(false);
-			}
-			else {
+			} else {
 				setFoodtruck(foodtruckData);
 				setHasFoodtruck(true);
 			}
-
-			// const userID = await setUserId(loggedInUser.id);
-			// const foodtruckID = await setUserFoodtruckId(loggedInUser.)
-			// return userID;
 		};
 
-		initialize()
-		// .then((userID) => {
-		// 	const data = retrieveOwnerFoodtruck(userID);
-
-		// 	if (!data) {
-		// 		setHasFoodtruck(false);
-		// 	}
-
-		// 	setHasFoodtruck(true);
-		// });
+		initialize();
 	}, []);
 
 	return (
@@ -67,7 +44,7 @@ const OwnerFoodtruck = () => {
 			{hasFoodtruck ? (
 				<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
 			) : (
-				<FoodtruckForm  />
+				<FoodtruckForm />
 			)}
 		</div>
 	);
