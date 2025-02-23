@@ -1,55 +1,33 @@
 //Lauren
 import {
 	Model,
+	type InferAttributes,
+	type InferCreationAttributes,
+	type CreationOptional,
 	DataTypes,
 	type Sequelize,
-	type Optional,
 	type ForeignKey,
 } from 'sequelize';
 
 import type { User } from './user.js';
 
-interface FoodtruckAttributes {
-	id: number;
-	foodtruckName: string;
-	cuisine: string;
-    menuImg?: string;
-	description: string;
-	zipCode: number; //then use API to autofill city/state
-    //use calendar api wiht dropdown menu - choose dates?
-	// startDate: Date;
-	// endDate: Date;	
-    startDate: string;
-	endDate: string;
+export class Foodtruck extends Model<
+	InferAttributes<Foodtruck>,
+	InferCreationAttributes<Foodtruck>
+> {
+	declare id: CreationOptional<number>;
+	declare foodtruckName: string;
+	declare cuisine: string;
+	declare menuImg: CreationOptional<string>;
+	declare description: string;
+	declare zipCode: number;
+	declare startDate: Date;
+	declare endDate: Date;
 
-	//TODO: Output - city, state
+	declare UserId: ForeignKey<User['id']>;
 }
 
-interface FoodTruckCreationAttributes
-	extends Optional<FoodtruckAttributes, 'id'> {}
-
-export class Foodtruck
-	extends Model<FoodtruckAttributes, FoodTruckCreationAttributes>
-	implements FoodtruckAttributes
-{
-	public id!: number;
-	public foodtruckName!: string;
-	public cuisine!: string;
-    public menuImg?: string;
-	public description!: string;
-	public zipCode!: number;
-	// public startDate!: Date;
-	// public endDate!: Date;
-    public startDate!: string;
-	public endDate!: string;
-
-	public declare userId: ForeignKey<User['id']>;
-
-	public readonly createdAt!: Date;
-	public readonly updatedAt!: Date;
-}
-
-export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
+export function FoodtruckFactory(sequelize: Sequelize) {
 	Foodtruck.init(
 		{
 			id: {
@@ -66,14 +44,14 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-            menuImg: {
+			menuImg: {
 				type: DataTypes.STRING,
 				allowNull: true,
-                validate: {
-                    isUrl: true,
-                }
+				validate: {
+					isUrl: true,
+				},
 			},
-            description: {
+			description: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
@@ -85,8 +63,7 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				},
 			},
 			startDate: {
-				// type: DataTypes.DATE,
-				type: DataTypes.STRING,
+				type: DataTypes.DATE,
 				allowNull: false,
 				validate: {
 					// isAfter: Foodtruck.createdAt,
@@ -94,8 +71,7 @@ export function FoodtruckFactory(sequelize: Sequelize): typeof Foodtruck {
 				},
 			},
 			endDate: {
-				// type: DataTypes.DATE,
-				type: DataTypes.STRING,
+				type: DataTypes.DATE,
 				allowNull: false,
 				validate: {
 					// isAfter: startDate,

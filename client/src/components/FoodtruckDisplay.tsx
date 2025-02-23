@@ -5,9 +5,9 @@ import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
 interface FoodtruckDisplayProps {
 	foodTruck: FoodtruckData | undefined;
-	userId: string;
+	userId: number;
 }
-
+//TODO: put user query inside this component rather than OwnerFoodtruck
 const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 	foodTruck,
 	userId,
@@ -19,7 +19,7 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 	useEffect(() => {
 		const findUserFoodtruck = async () => {
 			try {
-				const foodtruckdata = await retrieveOwnerFoodtruck(parseInt(userId));
+				const foodtruckdata = await retrieveOwnerFoodtruck(userId);
 				setDisplayedFoodtruck(foodtruckdata);
 			} catch (err) {
 				console.error('Failed to render foodtruck data for user', err);

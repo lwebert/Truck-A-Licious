@@ -11,8 +11,8 @@ const FoodtruckForm: React.FC = () => {
 		menuImg: null,
 		description: null,
 		zipCode: null,
-		startDate: null, //new Date()
-		endDate: null, //new Date(),
+		startDate: new Date(),
+		endDate: new Date(),
 	});
 
 	const createNewFoodtruck = async (body: FoodtruckData) => {
@@ -26,10 +26,25 @@ const FoodtruckForm: React.FC = () => {
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
-		setNewFoodtruck((prevState) => ({
-			...prevState,
-			[name]: name.includes('Date') ? new Date(value) : value || null,
-		}));
+		const newFoodtruckClone: FoodtruckData = { ...newFoodtruck };
+
+		const keys = Object.keys(newFoodtruckClone);
+		if (!keys.includes(name)) {
+			console.log('Invalid name: ', name);
+			return;
+		}
+
+		if (name === 'zipCode') {
+			console.log(value);
+			if (isNaN(value as any)) {
+				console.log('Invalid number input: ', value);
+				return;
+			}
+			(newFoodtruckClone as any)[name] = parseInt(value);
+		} else {
+			(newFoodtruckClone as any)[name] = value;
+		}
+		setNewFoodtruck(newFoodtruckClone);
 	};
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +55,22 @@ const FoodtruckForm: React.FC = () => {
 				menuImg: file.name,
 			}));
 		}
+	};
+
+	const handleDateChange = (
+		event: React.ChangeEvent<HTMLInputElement>,
+		key: string
+	) => {
+		const { name, value } = event.target;
+		const newFoodtruckClone: FoodtruckData = { ...newFoodtruck };
+
+		if (name !== key) {
+			console.log('Input mismatch. Expected: ', key, 'Received :', name);
+		}
+
+		(newFoodtruckClone as any)[key] = new Date(value);
+
+		setNewFoodtruck(newFoodtruckClone);
 	};
 
 	const handleSubmit = async (event: FormEvent) => {
@@ -63,13 +94,19 @@ const FoodtruckForm: React.FC = () => {
 				<label>Foodtruck Name: </label>
 				<input
 					value={newFoodtruck?.foodtruckName || ''}
-					onChange={handleChange}
+					onChange={(event) => {
+						handleChange(event);
+					}}
+					type="text"
+					name="foodtruckName"
 				/>
 
 				<label>Foodtruck Description: </label>
 				<input
 					value={newFoodtruck?.description || ''}
 					onChange={handleChange}
+					type="text"
+					name="description"
 				/>
 
 				<label>Cuisine: </label>
@@ -77,6 +114,7 @@ const FoodtruckForm: React.FC = () => {
 					list="cuisines"
 					value={newFoodtruck?.cuisine || ''}
 					onChange={handleChange}
+					name="cuisine"
 				/>
 				<datalist id="cuisines">
 					<option value="italian">Italian</option>
@@ -89,17 +127,23 @@ const FoodtruckForm: React.FC = () => {
 				</datalist>
 
 				<label>Select an image of your menu: </label>
-				<input type="file" id="menufile" onChange={handleFileChange} />
+				<input
+					type="file"
+					id="menufile"
+					onChange={handleFileChange}
+					name="menuImg"
+				/>
 
 				<label>Zip Code: </label>
 				<input
-					type="number"
+					type="text"
 					value={
 						newFoodtruck?.zipCode !== null
 							? newFoodtruck.zipCode
 							: ''
 					}
 					onChange={handleChange}
+					name="zipCode"
 				/>
 
 				<label>Start Date: </label>
@@ -111,7 +155,9 @@ const FoodtruckForm: React.FC = () => {
 							? newFoodtruck.startDate.toISOString().split('T')[0]
 							: ''
 					}
-					onChange={handleChange}
+					onChange={(event) => {
+						handleDateChange(event, 'startDate');
+					}}
 				/>
 
 				<label>End Date: </label>
@@ -123,7 +169,9 @@ const FoodtruckForm: React.FC = () => {
 							? newFoodtruck.endDate.toISOString().split('T')[0]
 							: ''
 					}
-					onChange={handleChange}
+					onChange={(event) => {
+						handleDateChange(event, 'endDate');
+					}}
 				/>
 
 				<button type="submit">Create Foodtruck</button>
