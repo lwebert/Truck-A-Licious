@@ -1,5 +1,4 @@
 //Lauren
-//NOTE - startDate and endDate will be errors right now... I'm working on it :)
 import { Foodtruck } from '../models/index.js';
 
 // import { format } from 'date-fns';

@@ -19,7 +19,7 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 	useEffect(() => {
 		const findUserFoodtruck = async () => {
 			try {
-				const foodtruckdata = await retrieveOwnerFoodtruck(userId);
+				const foodtruckdata = await retrieveOwnerFoodtruck(parseInt(userId));
 				setDisplayedFoodtruck(foodtruckdata);
 			} catch (err) {
 				console.error('Failed to render foodtruck data for user', err);
@@ -45,10 +45,10 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 				Start Date: {displayedFoodtruck.startDate?.toLocaleDateString()}
 			</p>
 			<p>End Date: {displayedFoodtruck.endDate?.toLocaleDateString()}</p>
-			<img
+			{/* <img
 				src={displayedFoodtruck?.menuImg}
 				alt={`${displayedFoodtruck.foodtruckName} menu`}
-			/>
+			/> */}
 		</div>
 	);
 

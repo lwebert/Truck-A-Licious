@@ -1,3 +1,4 @@
+//Lauren
 import {
 	Model,
 	DataTypes,
@@ -42,7 +43,7 @@ export class Foodtruck
     public startDate!: string;
 	public endDate!: string;
 
-	declare userId: ForeignKey<User['id']>;
+	public declare userId: ForeignKey<User['id']>;
 
 	public readonly createdAt!: Date;
 	public readonly updatedAt!: Date;

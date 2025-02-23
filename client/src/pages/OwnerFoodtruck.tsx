@@ -67,7 +67,7 @@ const OwnerFoodtruck = () => {
 			{hasFoodtruck ? (
 				<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
 			) : (
-				<FoodtruckForm />
+				<FoodtruckForm  />
 			)}
 		</div>
 	);
