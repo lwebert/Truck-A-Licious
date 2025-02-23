@@ -1,51 +1,76 @@
-// import { useState } from 'react';
-// import { FormEvent, useState } from 'react';
-// import {
-// 	retrieveOwnerFoodtruck,
-// 	createOwnerFoodtruck,
-// } from '../api/foodtruckAPI';
-// import DatePicker from 'react-datepicker';
-// import FoodtruckData from '../interfaces/FoodtruckData';
+//Lauren
+import { useEffect, useState } from 'react';
+import { retrieveUsers } from '../api/userAPI';
+import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
-const NewFoodtruck = () => {
-	// const [newFoodtruck, setNewFoodtruck] = useState<FoodtruckData | undefined>({
-	// 	id: null,
-	// 	foodtruckName: '',
-	// 	cuisine: '',
-	// 	menuImg: '',
-	// 	description: '',
-	// 	zipCode: null,
-	// 	startDate: new Date(),
-	// 	endDate: new Date(),
-	// });
+import FoodtruckData from '../interfaces/FoodtruckData';
+import FoodtruckForm from '../components/FoodtruckForm';
+import FoodtruckDisplay from '../components/FoodtruckDisplay';
 
-	// const createNewFoodtruck = async (body: FoodtruckData) => {
-	// 	try {
-	// 		const foodtruckdata = await createOwnerFoodtruck(body);
-	// 		return foodtruckdata;
-	// 	} catch (err) {
-	// 		console.error('Failed to create new foodtruck', err);
-	// 	}
-	// };
+const OwnerFoodtruck = () => {
+	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
+	const [userId, setUserId] = useState<string>('');
+	// const [userFoodtruckId, setUserFoodtruckId] = useState<string>('');
 
-	// const handleSubmit = async (event: FormEvent) => {
-	// 	event.preventDefault();
-	// 	if (newFoodtruck) {
-	// 		const data = createNewFoodtruck(newFoodtruck);
-	// 		console.log(data);
-	// 	}
-	// };
+	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
+		undefined 
+		// {
+		// id: null,
+		// foodtruckName: '',
+		// cuisine: '',
+		// menuImg: '',
+		// description: '',
+		// zipCode: null,
+		// startDate: new Date(),
+		// endDate: new Date(),}
+		);
+
+	useEffect(() => {
+		const initialize = async () => {
+			const loggedInUser = await retrieveUsers();
+
+			if (!loggedInUser || !loggedInUser.id) {
+				console.error('Error retrieving logged in user information');
+				return;
+			}
+
+			setUserId(loggedInUser.id);
+
+			const foodtruckData = await retrieveOwnerFoodtruck(loggedInUser.id);
+			if (!foodtruckData) {
+				setHasFoodtruck(false);
+			}
+			else {
+				setFoodtruck(foodtruckData);
+				setHasFoodtruck(true);
+			}
+
+			// const userID = await setUserId(loggedInUser.id);
+			// const foodtruckID = await setUserFoodtruckId(loggedInUser.)
+			// return userID;
+		};
+
+		initialize()
+		// .then((userID) => {
+		// 	const data = retrieveOwnerFoodtruck(userID);
+
+		// 	if (!data) {
+		// 		setHasFoodtruck(false);
+		// 	}
+
+		// 	setHasFoodtruck(true);
+		// });
+	}, []);
 
 	return (
 		<div>
-			{/* <form onSubmit={handleSubmit}>
-				<h1>Add New Foodtruck</h1>
-
-				<label>Foodtruck Name: </label>
-				<input type="text" name="foodtruckName" value={newFoodtruck?.foodtruckName || ''}  onChange={handleChange} />
-			</form> */}
+			{hasFoodtruck ? (
+				<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
+			) : (
+				<FoodtruckForm  />
+			)}
 		</div>
 	);
 };
 
-export default NewFoodtruck;
+export default OwnerFoodtruck;

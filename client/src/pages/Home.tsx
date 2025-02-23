@@ -3,8 +3,10 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
-import UserList from '../components/Users';
+// import UserList from '../components/Users';
 import auth from '../utils/auth';
+
+import OwnerFoodtruck from './OwnerFoodtruck';
 
 
 const Home = () => {
@@ -44,6 +46,7 @@ const Home = () => {
         return <ErrorPage />;
     }
 
+    console.log(users);
     return (
         <>
             {
@@ -54,7 +57,8 @@ const Home = () => {
                         </h1>
                     </div>
                 ) : (
-                    <UserList users={users} />
+                    // <UserList users={users} />
+                    <OwnerFoodtruck />
                     // // <FoodtruckOwner />
                     // <div></div>
                 )}

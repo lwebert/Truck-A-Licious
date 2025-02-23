@@ -11,10 +11,10 @@ const retrieveFoodtrucksbyZip = async () => {};
 
 //fetch to api/foodtrucks/:id (GET) - for foodtruckOwner page
 const retrieveOwnerFoodtruck = async (
-	id: number | null
+	userId: number | null
 ): Promise<FoodtruckData> => {
 	try {
-		const response = await fetch(`api/volunteers/${id}`, {
+		const response = await fetch(`api/foodtrucks/${userId}`, {
 			headers: {
 				'Content-Type': 'application/json',
 			},
