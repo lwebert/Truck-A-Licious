@@ -39,6 +39,24 @@ router.get('/:zipCode', async (req: Request, res: Response) => {
 });
 
 
+//GET foodtruck for logged in User
+router.get('/:userId', async (req: Request, res: Response) => {
+    const userId = req.user?.username;
+    try {
+        const foodTruck = await Foodtruck.findOne(
+            {where: {UserId: userId}}
+        )
+        if (!foodTruck) {
+            res.status(404).json({message: 'No food truck found for user.'})
+        }
+        return res.json(foodTruck)
+    }
+    catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+
 //TODO: POST request to create a foodtruck
 
 

@@ -2,8 +2,6 @@ import { useState, FormEvent } from 'react';
 import FoodtruckData from '../interfaces/FoodtruckData';
 import { createOwnerFoodtruck } from '../api/foodtruckAPI';
 
-
-
 const FoodtruckForm: React.FC<FoodtruckData> = () => {
 	const [newFoodtruck, setNewFoodtruck] = useState<FoodtruckData>({
 		id: null,
@@ -12,8 +10,8 @@ const FoodtruckForm: React.FC<FoodtruckData> = () => {
 		menuImg: null,
 		description: null,
 		zipCode: null,
-		startDate: new Date(),
-		endDate: new Date(),
+		startDate: null, //new Date()
+		endDate: null, //new Date(),
 	});
 
 	const createNewFoodtruck = async (body: FoodtruckData) => {

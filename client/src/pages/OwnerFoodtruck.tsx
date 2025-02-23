@@ -1,7 +1,6 @@
+//Lauren
 import { useEffect, useState } from 'react';
-
 import { retrieveUsers } from '../api/userAPI';
-
 import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
 import FoodtruckData from '../interfaces/FoodtruckData';
@@ -11,17 +10,20 @@ import FoodtruckDisplay from '../components/FoodtruckDisplay';
 const OwnerFoodtruck = () => {
 	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
 	const [userId, setUserId] = useState<string>('');
+	// const [userFoodtruckId, setUserFoodtruckId] = useState<string>('');
 
-	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>({
-		id: null,
-		foodtruckName: '',
-		cuisine: '',
-		menuImg: '',
-		description: '',
-		zipCode: null,
-		startDate: new Date(),
-		endDate: new Date(),
-	});
+	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
+		undefined 
+		// {
+		// id: null,
+		// foodtruckName: '',
+		// cuisine: '',
+		// menuImg: '',
+		// description: '',
+		// zipCode: null,
+		// startDate: new Date(),
+		// endDate: new Date(),}
+		);
 
 	useEffect(() => {
 		const initialize = async () => {
@@ -29,27 +31,41 @@ const OwnerFoodtruck = () => {
 
 			if (!loggedInUser || !loggedInUser.id) {
 				console.error('Error retrieving logged in user information');
+				return;
 			}
 
-			const userID = await setUserId(loggedInUser.id);
-			return userID;
-		};
+			setUserId(loggedInUser.id);
 
-		initialize().then((userID) => {
-			const data = retrieveOwnerFoodtruck(userID);
-
-			if (!data) {
+			const foodtruckData = await retrieveOwnerFoodtruck(loggedInUser.id);
+			if (!foodtruckData) {
 				setHasFoodtruck(false);
 			}
+			else {
+				setFoodtruck(foodtruckData);
+				setHasFoodtruck(true);
+			}
 
-			setHasFoodtruck(true);
-		});
+			// const userID = await setUserId(loggedInUser.id);
+			// const foodtruckID = await setUserFoodtruckId(loggedInUser.)
+			// return userID;
+		};
+
+		initialize()
+		// .then((userID) => {
+		// 	const data = retrieveOwnerFoodtruck(userID);
+
+		// 	if (!data) {
+		// 		setHasFoodtruck(false);
+		// 	}
+
+		// 	setHasFoodtruck(true);
+		// });
 	}, []);
 
 	return (
 		<div>
 			{hasFoodtruck ? (
-				<FoodtruckDisplay userId={userId} />
+				<FoodtruckDisplay foodTruck={foodTruck} userId={userId} />
 			) : (
 				<FoodtruckForm />
 			)}
@@ -57,5 +73,4 @@ const OwnerFoodtruck = () => {
 	);
 };
 
-//separately make 2 food truck componts - conditionally render
 export default OwnerFoodtruck;
