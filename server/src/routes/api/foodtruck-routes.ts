@@ -93,5 +93,34 @@ router.post('/', async (req: Request, res: Response) => {
 		});
 	}
 });
+router.post('/', async (req: Request, res: Response) => {
+    const {
+        foodtruckName,
+        cuisine,
+        menuImg,
+        description,
+        zipCode,
+        startDate,
+        endDate,
+        UserId,
+    } = req.body;
+    try {
+        const newFoodtruck = await Foodtruck.create({
+            foodtruckName,
+            cuisine,
+            menuImg,
+            description,
+            zipCode,
+            startDate,
+            endDate,
+            UserId,
+        });
+        res.status(201).json(newFoodtruck);
+    } catch (error: any) {
+        res.status(400).json({
+            message: error.message,
+        });
+    }
+});
 
 export { router as foodtruckRouter };
