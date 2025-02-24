@@ -5,7 +5,7 @@ import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
 interface FoodtruckDisplayProps {
 	foodTruck: FoodtruckData | undefined;
-	userId: number;
+	userId: number | null;
 }
 //TODO: put user query inside this component rather than OwnerFoodtruck
 const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
