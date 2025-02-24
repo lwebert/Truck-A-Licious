@@ -3,31 +3,110 @@ import { useState, useEffect, useLayoutEffect } from 'react';
 import { retrieveUsers } from '../api/userAPI';
 import type { UserData } from '../interfaces/UserData';
 import ErrorPage from './ErrorPage';
-// import UserList from '../components/Users';
 import auth from '../utils/auth';
+// import UsersService from '../utils/users';
 
-// import OwnerFoodtruck from './OwnerFoodtruck';
 import FoodtruckForm from '../components/FoodtruckForm';
+import FoodtruckDisplay from '../components/FoodtruckDisplay';
+import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
+import FoodtruckData from '../interfaces/FoodtruckData';
 
 const Home = () => {
 	const [users, setUsers] = useState<UserData[]>([]);
-	const [error, setError] = useState(false);
-	const [loginCheck, setLoginCheck] = useState(false);
+	const [error, setError] = useState<boolean>(false);
+	const [loginCheck, setLoginCheck] = useState<boolean>(false);
 
-	useEffect(() => {
+	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
+	// const [userId, setUserId] = useState<number | null>(null);
+	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
+		undefined
+	);
+    useEffect(() => {
 		if (loginCheck) {
 			fetchUsers();
 		}
 	}, [loginCheck]);
 
+
+    //Try #2:
+	// useEffect(() => {
+	// 	if (loginCheck) {
+	// 		fetchUsers(); //grabs all users, sets to users state variable
+
+	// 		const loggedInUser = auth.getProfile();
+	// 		// if (
+	// 		// 	!loggedInUser ||
+	// 		// 	!loggedInUser.id ||
+	// 		// 	typeof loggedInUser.id === 'number'
+	// 		// ) 
+    //         if (
+	// 			!loggedInUser ||
+	// 			!loggedInUser.username ||
+	// 			typeof loggedInUser.username === 'string'
+	// 		) {
+	// 			console.error('Error retrieving logged in user information');
+	// 			return;
+	// 		} else {
+	// 			setUserId(loggedInUser.username);
+	// 			foodtruckcheck(loggedInUser.username);
+    //             // setUserId(loggedInUser.id);
+	// 			// foodtruckcheck(loggedInUser.id);
+	// 		}
+	// 	}
+	// }, [loginCheck]);
+
+    //--Try #3:
+	// useEffect(() => {
+	// 	if (loginCheck) {
+	// 		fetchUsers(); //grabs all users, sets to users state variable
+	// 	}
+	// }, [loginCheck]);
+
+	// useEffect(() => {
+	// 	const retrieveUserId = async () => {
+	// 		const userid = await UsersService.getUserIdByUsername();
+	// 		setUserId(userid);
+	// 	};
+	// 	retrieveUserId();
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (userId !== null) {
+	// 		foodtruckcheck(userId);
+	// 	}
+	// }, [userId]);
+
+
+
 	useLayoutEffect(() => {
 		checkLogin();
 	}, []);
+
 
 	const checkLogin = () => {
 		if (auth.loggedIn()) {
 			console.log('logged in!');
 			setLoginCheck(true);
+		}
+	};
+
+	const foodtruckcheck = async (userid: number) => {
+		try {
+			const foodtruckData = await retrieveOwnerFoodtruck(userid);
+
+			console.log('Retreive owner foodtruck data: ', foodtruckData);
+
+			if (!foodtruckData) {
+				setHasFoodtruck(false);
+			} else {
+				setFoodtruck(foodtruckData);
+				setHasFoodtruck(true);
+			}
+		} catch (err) {
+			console.error(
+				'Error retrieving food truck data from user id.',
+				err
+			);
 		}
 	};
 
@@ -49,10 +128,11 @@ const Home = () => {
 	//TODO: Do all conditional rendering of pages here - including the food truck owners
 	return (
 		<>
-			{!loginCheck ? (
-				<div className="login-notice">
-					<h1>Foodtrucks coming to your area!</h1>
-					<div>
+			{
+				!loginCheck ? (
+					<div className="login-notice">
+						<h1>Foodtrucks coming to your area!</h1>
+						<div>
 						<div>Monday</div>
 						<div>Tuesday</div>
 						<div>Wed</div>
@@ -61,12 +141,13 @@ const Home = () => {
 					</div>
 
 				</div>
-			) : (
-				// TODO: Create state and imports
-				// foodtruckCheck ? (<FoodtruckDisplay />) : (<FoodtruckForm />)
-				// <div></div>
-				<FoodtruckForm />
-			)}
+				) : // TODO: Create state and imports
+				hasFoodtruck ? (
+					<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
+				) : (
+					<FoodtruckForm />
+				)
+			}
 		</>
 	);
 };

@@ -59,6 +59,7 @@ const retrieveOwnerFoodtruck = async (
 const createOwnerFoodtruck = async (
 	body: FoodtruckData
 ): Promise<FoodtruckData> => {
+	console.log("API body: ", body)
 	try {
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',
@@ -68,7 +69,7 @@ const createOwnerFoodtruck = async (
 			body: JSON.stringify(body),
 		});
 
-		// Check for API response errors before parsing JSON
+		// Check for API await response errors before parsing JSON
 		if (!response.ok) {
 			throw new Error(`Invalid API response: ${response.status} ${response.statusText}`);
 		}
