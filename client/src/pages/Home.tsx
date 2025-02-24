@@ -23,37 +23,28 @@ const Home = () => {
 	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
 		undefined
 	);
+	// const [loggedInOwner, setLoggedInOwner] = useState<UserData | undefined>(
+	// 	undefined
+	// );
 
-	useEffect(() => {
-		const initialize = async () => {
-			// const loggedInUser = await UsersService.getUserIdByEmail();
-			// console.log(loggedInUser);
-			// const loggedInUser = 1;
-			const loggedInUser = await retrieveUsers();
-
-			if (!loggedInUser) {
-				console.error('Error retrieving logged in user information');
-				return;
-			}
-			const userid = await setUserId(loggedInUser.id);
-			console.log('UserID setUserId Home page: ', userid);
-
-			const foodtruckData = await retrieveOwnerFoodtruck(userid);
-
-			if (!foodtruckData) {
-				setHasFoodtruck(false);
-			} else {
-				setFoodtruck(foodtruckData);
-				setHasFoodtruck(true);
-			}
-		};
-
-		initialize();
-	}, []);
+	//check if the user has a foodtruck
 
 	useEffect(() => {
 		if (loginCheck) {
-			fetchUsers();
+			fetchUsers(); //grabs all users, sets to users state variable
+
+			const loggedInUser = auth.getProfile();
+			if (
+				!loggedInUser ||
+				!loggedInUser.id ||
+				typeof loggedInUser.id === 'number'
+			) {
+				console.error('Error retrieving logged in user information');
+				return;
+			} else {
+				setUserId(loggedInUser.id);
+				foodtruckcheck(loggedInUser.id);
+			}
 		}
 	}, [loginCheck]);
 
@@ -65,6 +56,23 @@ const Home = () => {
 		if (auth.loggedIn()) {
 			console.log('logged in!');
 			setLoginCheck(true);
+		}
+	};
+
+	const foodtruckcheck = async (userid: number) => {
+		try {
+			const foodtruckData = await retrieveOwnerFoodtruck(userid);
+
+			console.log('Retreive owner foodtruck data: ', foodtruckData);
+
+			if (!foodtruckData) {
+				setHasFoodtruck(false);
+			} else {
+				setFoodtruck(foodtruckData);
+				setHasFoodtruck(true);
+			}
+		} catch (err) {
+			console.error('Error retrieving food truck data from user id.', err);
 		}
 	};
 
