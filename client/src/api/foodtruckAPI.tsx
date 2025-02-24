@@ -36,6 +36,7 @@ const retrieveOwnerFoodtruck = async (
 const createOwnerFoodtruck = async (
 	body: FoodtruckData
 ): Promise<FoodtruckData> => {
+	console.log("API body: ", body)
 	try {
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',
@@ -45,7 +46,7 @@ const createOwnerFoodtruck = async (
 			body: JSON.stringify(body),
 		});
 
-		const data = response.json();
+		const data = await response.json();
 		if (!response.ok) {
 			throw new Error('invalid API response, check network tab!');
 		}
