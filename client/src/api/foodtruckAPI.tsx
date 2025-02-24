@@ -1,21 +1,17 @@
 //Lauren
 
 import FoodtruckData from '../interfaces/FoodtruckData';
-import Apiip from 'apiip.net';
 
-const apiip = Apiip('23e1d706-f8ad-45d6-a0b9-94c4f5b8996c');
+import Apiip from 'apiip.net';
+const GeoAPIkey = import.meta.env.GeoAPIkey;
+const apiip = new Apiip(GeoAPIkey);
 
 (async () => {
   console.log(await apiip.getLocation());
 })();
 
-apiip
-  .getLocation({
-    fields: 'city, countryName',
-    languages: 'es',
-  })
-  .then((results) => console.log(results))
-  .catch((error) => console.error(error));
+
+ 
 
 //fetch to api/foodtrucks (GET) - for home page calendar
 const retrieveAllFoodtrucks = async () => { };
