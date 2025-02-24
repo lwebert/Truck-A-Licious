@@ -35,7 +35,7 @@ const Login = () => {
 	return (
 		<div className="center-container">
 			<div className="card">
-				<h1 className="text-center mb-4">Truekalicious</h1>
+				<h1 className="text-center mb-4">Truck-A-Licious</h1>
 				<form onSubmit={handleSubmit}>
 					<div className="mb-3">
 						<label htmlFor="username" className="form-label">
