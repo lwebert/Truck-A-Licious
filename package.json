@@ -29,6 +29,6 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
-    "react-datepicker": "^8.1.0",
+    "react-datepicker": "^8.1.0"
   }
 }
