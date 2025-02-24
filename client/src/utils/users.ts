@@ -4,6 +4,7 @@ import { User } from '../../../server/src/models/user';
 class UsersService {
 	async getUserIdByUsername() {
 		const profile = AuthService.getProfile();
+
 		if (!profile || !profile.username) {
 			throw new Error('Profile not found.');
 		}
