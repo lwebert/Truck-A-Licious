@@ -16,8 +16,10 @@ const FoodtruckForm: React.FC = () => {
 	});
 
 	const createNewFoodtruck = async (body: FoodtruckData) => {
+		console.log("Foodtruck form, body: ", body)
 		try {
 			const foodtruckdata = await createOwnerFoodtruck(body);
+			console.log("Foodtruck form, foodtruck data after createOwnerFoodtruck(): ", foodtruckdata)
 			return foodtruckdata;
 		} catch (err) {
 			console.error('Failed to create new foodtruck', err);
@@ -75,15 +77,20 @@ const FoodtruckForm: React.FC = () => {
 
 	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
+		console.log(newFoodtruck);
 		if (
-			newFoodtruck.foodtruckName &&
-			newFoodtruck.cuisine &&
-			newFoodtruck.menuImg &&
-			newFoodtruck.description &&
-			newFoodtruck.zipCode !== null
+			// newFoodtruck.foodtruckName &&
+			// newFoodtruck.cuisine &&
+			// newFoodtruck.menuImg &&
+			// newFoodtruck.description &&
+			// newFoodtruck.zipCode !== null
+			newFoodtruck
 		) {
-			const data = createNewFoodtruck(newFoodtruck);
-			console.log(data);
+			const data = await createNewFoodtruck(newFoodtruck);
+			console.log("Foodtruck created: ", data);
+		}
+		else {
+			console.log("New food truck doesn't have all fields.")
 		}
 	};
 
@@ -181,14 +188,3 @@ const FoodtruckForm: React.FC = () => {
 };
 
 export default FoodtruckForm;
-
-{
-	/* <DatePicker
-	selected={startDate}
-	onChange={(date) => setStartDate(date)}
-	dateFormat="yyyy-MM-dd"
-	startDate={startDate}
-	endDate={endDate}
-	name="startDate"
-/>; */
-}
