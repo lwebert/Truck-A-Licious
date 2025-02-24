@@ -51,13 +51,21 @@ const Home = () => {
 		<>
 			{!loginCheck ? (
 				<div className="login-notice">
-					<h1>Login to view all your friends!</h1>
+					<h1>Foodtrucks coming to your area!</h1>
+					<div>
+						<div>Monday</div>
+						<div>Tuesday</div>
+						<div>Wed</div>
+						<div>Th</div>
+						<div>Fr</div>
+					</div>
+
 				</div>
 			) : (
 				// TODO: Create state and imports
 				// foodtruckCheck ? (<FoodtruckDisplay />) : (<FoodtruckForm />)
 				// <div></div>
-                <FoodtruckForm />
+				<FoodtruckForm />
 			)}
 		</>
 	);
