@@ -3,7 +3,15 @@ import { useState, FormEvent } from 'react';
 import FoodtruckData from '../interfaces/FoodtruckData';
 import { createOwnerFoodtruck } from '../api/foodtruckAPI';
 
-const FoodtruckForm: React.FC = () => {
+interface FoodtruckFormProps {
+	foodtruckSubmit: () => void;
+	userId: number | null;
+}
+
+const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
+	foodtruckSubmit,
+	userId,
+}) => {
 	const [newFoodtruck, setNewFoodtruck] = useState<FoodtruckData>({
 		id: null,
 		foodtruckName: null,
@@ -13,13 +21,18 @@ const FoodtruckForm: React.FC = () => {
 		zipCode: null,
 		startDate: new Date(),
 		endDate: new Date(),
+		UserId: userId,
 	});
 
 	const createNewFoodtruck = async (body: FoodtruckData) => {
-		console.log("Foodtruck form, body: ", body)
+		const foodtruckData = { ...body, UserId: userId };
+		console.log('Foodtruck form, body and userId: ', foodtruckData);
 		try {
-			const foodtruckdata = await createOwnerFoodtruck(body);
-			console.log("Foodtruck form, foodtruck data after createOwnerFoodtruck(): ", foodtruckdata)
+			const foodtruckdata = await createOwnerFoodtruck(foodtruckData);
+			console.log(
+				'Foodtruck form, foodtruck data after createOwnerFoodtruck(): ',
+				foodtruckdata
+			);
 			return foodtruckdata;
 		} catch (err) {
 			console.error('Failed to create new foodtruck', err);
@@ -87,10 +100,10 @@ const FoodtruckForm: React.FC = () => {
 			newFoodtruck
 		) {
 			const data = await createNewFoodtruck(newFoodtruck);
-			console.log("Foodtruck created: ", data);
-		}
-		else {
-			console.log("New food truck doesn't have all fields.")
+			foodtruckSubmit();
+			console.log('Foodtruck created: ', data);
+		} else {
+			console.log("New food truck doesn't have all fields.");
 		}
 	};
 
