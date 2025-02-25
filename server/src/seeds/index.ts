@@ -14,8 +14,8 @@ const seedAll = async (): Promise<void> => {
 			const endDate1 = new Date();
 			endDate1.setDate(new Date().getDate() + 7);
 
-			const endDate2 = new Date();
-			endDate2.setDate(new Date().getDate() + 7);
+			// const endDate2 = new Date();
+			// endDate2.setDate(new Date().getDate() + 7);
 
 			await Foodtruck.create({
 				foodtruckName: 'Test' + user.id,
