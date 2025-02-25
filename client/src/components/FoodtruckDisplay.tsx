@@ -42,18 +42,18 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 			<p>Cuisine: {displayedFoodtruck.cuisine}</p>
 			<p>Description: {displayedFoodtruck.description}</p>
 			<p>Zip Code: {displayedFoodtruck.zipCode}</p>
-			<p>
-				Start Date: {displayedFoodtruck.startDate}
-			</p>
+			
+			<p>Start Date: {displayedFoodtruck.startDate}</p>
 			<p>End Date: {displayedFoodtruck.endDate}</p>
 
-			<img
-				src={displayedFoodtruck?.menuImg}
-				alt={`${displayedFoodtruck.foodtruckName} menu`}
-			/>
+			{displayedFoodtruck?.menuImg ? (
+				<img
+					src={displayedFoodtruck?.menuImg}
+					alt={`${displayedFoodtruck.foodtruckName} menu`}
+				/>
+			) : null}
 		</div>
 	);
 };
 
 export default FoodtruckDisplay;
-
