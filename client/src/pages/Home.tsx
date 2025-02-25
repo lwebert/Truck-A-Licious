@@ -139,11 +139,9 @@ const Home = () => {
 						<div className='hp-card1'>
 							<h2>Monday</h2>
 								<ul>
-								<li className='hp-card-li'>
-									Matthew's Foodtruck
-									Alices Foodtruck
-									John's Foodtruck
-								</li>
+								<li className='hp-card-li'>Matthew's Foodtruck</li>
+								<li className='hp-card-li'>Alices Foodtruck</li>
+								<li className='hp-card-li'>John's Foodtruck</li>
 								</ul>
 							</div>
 						<div className='hp-card2'>Tuesday</div>
