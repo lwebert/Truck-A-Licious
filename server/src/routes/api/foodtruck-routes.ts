@@ -60,11 +60,12 @@ router.get('/:UserId', async (req: Request, res: Response) => {
 		console.log("Foodtruck: ", foodTruck)
 		if (!foodTruck) {
 			console.log("No foodTruck")
-			res.status(404).json({ message: 'No food truck found for user.' });
+			return res.status(404).json({ message: 'No food truck found for user.' });
 		}
 		return res.json(foodTruck);
-	} catch (err) {
-		return res.status(500).json(err);
+
+	} catch (err: any ) {
+		return res.status(500).json(err.message);
 	}
 });
 
@@ -100,34 +101,34 @@ router.post('/', async (req: Request, res: Response) => {
 		});
 	}
 });
-router.post('/', async (req: Request, res: Response) => {
-    const {
-        foodtruckName,
-        cuisine,
-        menuImg,
-        description,
-        zipCode,
-        startDate,
-        endDate,
-        UserId,
-    } = req.body;
-    try {
-        const newFoodtruck = await Foodtruck.create({
-            foodtruckName,
-            cuisine,
-            menuImg,
-            description,
-            zipCode,
-            startDate,
-            endDate,
-            UserId,
-        });
-        res.status(201).json(newFoodtruck);
-    } catch (error: any) {
-        res.status(400).json({
-            message: error.message,
-        });
-    }
-});
+// router.post('/', async (req: Request, res: Response) => {
+//     const {
+//         foodtruckName,
+//         cuisine,
+//         menuImg,
+//         description,
+//         zipCode,
+//         startDate,
+//         endDate,
+//         UserId,
+//     } = req.body;
+//     try {
+//         const newFoodtruck = await Foodtruck.create({
+//             foodtruckName,
+//             cuisine,
+//             menuImg,
+//             description,
+//             zipCode,
+//             startDate,
+//             endDate,
+//             UserId,
+//         });
+//         res.status(201).json(newFoodtruck);
+//     } catch (error: any) {
+//         res.status(400).json({
+//             message: error.message,
+//         });
+//     }
+// });
 
 export { router as foodtruckRouter };

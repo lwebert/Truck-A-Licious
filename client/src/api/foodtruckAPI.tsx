@@ -2,22 +2,7 @@
 
 import FoodtruckData from '../interfaces/FoodtruckData';
 import Auth from '../utils/auth';
-
-// import Apiip from 'apiip.net';
-// const GeoAPI = import.meta.env.GeoAPIkey
-// const apiip = Apiip(GeoAPI);
-
-// (async () => {
-	
-// 	const ipAddress = await apiip.getIP();
-	
-// 	console.log(await apiip.ipLocation(ipAddress));
-//   })();
-	
-  
-
  
-
 //fetch to api/foodtrucks (GET) - for home page calendar
 const retrieveAllFoodtrucks = async () => {};
 
@@ -77,12 +62,19 @@ const createOwnerFoodtruck = async (
 ): Promise<FoodtruckData> => {
 	console.log('API body: ', body);
 	try {
+		const userid = Auth.getProfile()?.id;
+		console.log("profile: ", Auth.getProfile());
+
+		const fooddata = { ...body, UserId: userid };
+		console.log("Food data:", fooddata);
+
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${Auth.getToken()}`,
 			},
-			body: JSON.stringify(body),
+			body: JSON.stringify(fooddata),
 		});
 
 		// Check for API await response errors before parsing JSON

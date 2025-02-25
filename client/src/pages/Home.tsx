@@ -75,6 +75,13 @@ const Home = () => {
 
 
 
+
+//TODO: Listen for FoodtruckForm.tsx handleSubmit event here
+    const foodtruckSubmit = () => {
+        setHasFoodtruck(true);
+    }
+
+
 	useLayoutEffect(() => {
 		checkLogin();
 	}, []);
@@ -150,7 +157,7 @@ const Home = () => {
 				hasFoodtruck ? (
 					<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
 				) : (
-					<FoodtruckForm />
+					<FoodtruckForm userId={userId} foodtruckSubmit={foodtruckSubmit}/>
 				)
 			}
 		</>
