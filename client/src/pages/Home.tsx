@@ -25,6 +25,56 @@ const Home = () => {
 	}, [loginCheck]);
 
 
+    //Try #2:
+	// useEffect(() => {
+	// 	if (loginCheck) {
+	// 		fetchUsers(); //grabs all users, sets to users state variable
+
+	// 		const loggedInUser = auth.getProfile();
+	// 		// if (
+	// 		// 	!loggedInUser ||
+	// 		// 	!loggedInUser.id ||
+	// 		// 	typeof loggedInUser.id === 'number'
+	// 		// ) 
+    //         if (
+	// 			!loggedInUser ||
+	// 			!loggedInUser.username ||
+	// 			typeof loggedInUser.username === 'string'
+	// 		) {
+	// 			console.error('Error retrieving logged in user information');
+	// 			return;
+	// 		} else {
+	// 			setUserId(loggedInUser.username);
+	// 			foodtruckcheck(loggedInUser.username);
+    //             // setUserId(loggedInUser.id);
+	// 			// foodtruckcheck(loggedInUser.id);
+	// 		}
+	// 	}
+	// }, [loginCheck]);
+
+    //--Try #3:
+	// useEffect(() => {
+	// 	if (loginCheck) {
+	// 		fetchUsers(); //grabs all users, sets to users state variable
+	// 	}
+	// }, [loginCheck]);
+
+	// useEffect(() => {
+	// 	const retrieveUserId = async () => {
+	// 		const userid = await UsersService.getUserIdByUsername();
+	// 		setUserId(userid);
+	// 	};
+	// 	retrieveUserId();
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (userId !== null) {
+	// 		foodtruckcheck(userId);
+	// 	}
+	// }, [userId]);
+
+
+
 	useLayoutEffect(() => {
 		checkLogin();
 	}, []);
