@@ -1,7 +1,8 @@
 //Lauren
 
 import FoodtruckData from '../interfaces/FoodtruckData';
-//want to try to save location from initial geolocation call to use in foodtruck creation and weather api
+import Auth from '../utils/auth';
+
 import Apiip from 'apiip.net';
 const GeoAPI = import.meta.env.GeoAPIkey
 const apiip = Apiip(GeoAPI);
@@ -18,11 +19,10 @@ const apiip = Apiip(GeoAPI);
  
 
 //fetch to api/foodtrucks (GET) - for home page calendar
-const retrieveAllFoodtrucks = async () => { };
+const retrieveAllFoodtrucks = async () => {};
 
 //fetch to api/foodtrucks/:zipCode (GET)- for home page calendar
-const retrieveFoodtrucksbyZip = async () => { };
-
+const retrieveFoodtrucksbyZip = async () => {};
 
 //fetch to api/foodtrucks/:id (GET) - for foodtruckOwner page
 const retrieveOwnerFoodtruck = async (
@@ -32,6 +32,7 @@ const retrieveOwnerFoodtruck = async (
 		const response = await fetch(`api/foodtrucks/${userId}`, {
 			headers: {
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${Auth.getToken()}`,
 			},
 		});
 		const data = await response.json();
@@ -74,7 +75,7 @@ const retrieveOwnerFoodtruck = async (
 const createOwnerFoodtruck = async (
 	body: FoodtruckData
 ): Promise<FoodtruckData> => {
-	console.log("API body: ", body)
+	console.log('API body: ', body);
 	try {
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',
@@ -86,7 +87,9 @@ const createOwnerFoodtruck = async (
 
 		// Check for API await response errors before parsing JSON
 		if (!response.ok) {
-			throw new Error(`Invalid API response: ${response.status} ${response.statusText}`);
+			throw new Error(
+				`Invalid API response: ${response.status} ${response.statusText}`
+			);
 		}
 
 		const data = await response.json();

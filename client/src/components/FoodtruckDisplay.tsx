@@ -35,16 +35,17 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 		return <div>No food truck found.</div>;
 	}
 
+	//TODO: fix display :)
 	return (
 		<div>
 			<h1>{displayedFoodtruck.foodtruckName}</h1>
 			<p>Cuisine: {displayedFoodtruck.cuisine}</p>
 			<p>Description: {displayedFoodtruck.description}</p>
 			<p>Zip Code: {displayedFoodtruck.zipCode}</p>
-			<p>
+			{/* <p>
 				Start Date: {displayedFoodtruck.startDate?.toLocaleDateString()}
 			</p>
-			<p>End Date: {displayedFoodtruck.endDate?.toLocaleDateString()}</p>
+			<p>End Date: {displayedFoodtruck.endDate?.toLocaleDateString()}</p> */}
 			{/* <img
 				src={displayedFoodtruck?.menuImg}
 				alt={`${displayedFoodtruck.foodtruckName} menu`}
