@@ -1,15 +1,19 @@
 //Lauren
 
 import FoodtruckData from '../interfaces/FoodtruckData';
-
+//want to try to save location from initial geolocation call to use in foodtruck creation and weather api
 import Apiip from 'apiip.net';
-const GeoAPIkey = import.meta.env.GeoAPIkey;
-const apiip = new Apiip(GeoAPIkey);
+const GeoAPI = import.meta.env.GeoAPIkey
+const apiip = Apiip(GeoAPI);
 
 (async () => {
-  console.log(await apiip.getLocation());
-})();
-
+	
+	const ipAddress = await apiip.getIP();
+	
+	console.log(await apiip.ipLocation(ipAddress));
+  })();
+	
+  
 
  
 
