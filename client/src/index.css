@@ -369,7 +369,7 @@ END NORMALIZE CSS
 }
 
 .navbar-brand {
-  color: white;
+  color: #FF699D;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -384,12 +384,8 @@ END NORMALIZE CSS
 }
 
 .nav-link {
-  color: white;
+  color: #FF699D;
   font-size: 1.5rem;
-}
-
-.bg-light {
-  background-color: #FF5691;
 }
 
 /* nav bar */
