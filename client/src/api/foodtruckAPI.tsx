@@ -3,16 +3,16 @@
 import FoodtruckData from '../interfaces/FoodtruckData';
 import Auth from '../utils/auth';
 
-import Apiip from 'apiip.net';
-const GeoAPI = import.meta.env.GeoAPIkey
-const apiip = Apiip(GeoAPI);
+// import Apiip from 'apiip.net';
+// const GeoAPI = import.meta.env.GeoAPIkey
+// const apiip = Apiip(GeoAPI);
 
-(async () => {
+// (async () => {
 	
-	const ipAddress = await apiip.getIP();
+// 	const ipAddress = await apiip.getIP();
 	
-	console.log(await apiip.ipLocation(ipAddress));
-  })();
+// 	console.log(await apiip.ipLocation(ipAddress));
+//   })();
 	
   
 
