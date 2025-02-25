@@ -75,3 +75,4 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 };
 
 export default FoodtruckDisplay;
+
