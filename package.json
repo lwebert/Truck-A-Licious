@@ -29,6 +29,9 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "date-fns": "^4.1.0",
-    "react-datepicker": "^8.1.0"
+    "react-datepicker": "^8.1.0",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
+    "slider": "^1.0.4"
   }
 }

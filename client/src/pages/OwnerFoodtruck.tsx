@@ -1,6 +1,6 @@
 //Lauren
 import { useEffect, useState } from 'react';
-import UsersService from '../utils/users';
+// import UsersService from '../utils/users';
 import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
 
 import FoodtruckData from '../interfaces/FoodtruckData';
