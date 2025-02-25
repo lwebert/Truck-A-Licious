@@ -17,43 +17,47 @@ const Home = () => {
 	const [loginCheck, setLoginCheck] = useState<boolean>(false);
 
 	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
-	// const [userId, setUserId] = useState<number | null>(null);
+	const [userId, setUserId] = useState<number | null>(null);
 	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
 		undefined
 	);
-    useEffect(() => {
-		if (loginCheck) {
-			fetchUsers();
-		}
-	}, [loginCheck]);
 
-
-    //Try #2:
-	// useEffect(() => {
+    // useEffect(() => {
 	// 	if (loginCheck) {
-	// 		fetchUsers(); //grabs all users, sets to users state variable
-
-	// 		const loggedInUser = auth.getProfile();
-	// 		// if (
-	// 		// 	!loggedInUser ||
-	// 		// 	!loggedInUser.id ||
-	// 		// 	typeof loggedInUser.id === 'number'
-	// 		// ) 
-    //         if (
-	// 			!loggedInUser ||
-	// 			!loggedInUser.username ||
-	// 			typeof loggedInUser.username === 'string'
-	// 		) {
-	// 			console.error('Error retrieving logged in user information');
-	// 			return;
-	// 		} else {
-	// 			setUserId(loggedInUser.username);
-	// 			foodtruckcheck(loggedInUser.username);
-    //             // setUserId(loggedInUser.id);
-	// 			// foodtruckcheck(loggedInUser.id);
-	// 		}
+	// 		fetchUsers();
 	// 	}
 	// }, [loginCheck]);
+
+
+    // Try #2:
+	useEffect(() => {
+		if (loginCheck) {
+			fetchUsers(); //grabs all users, sets to users state variable
+
+			const loggedInUser = auth.getProfile();
+			// if (
+			// 	!loggedInUser ||
+			// 	!loggedInUser.id ||
+			// 	typeof loggedInUser.id === 'number'
+			// ) 
+            console.log(typeof loggedInUser.id)
+
+
+            if (
+				!loggedInUser ||
+				!loggedInUser.id ||
+				typeof loggedInUser.id !== 'number'
+			) {
+				console.error('Error retrieving logged in user information');
+				return;
+			} else {
+				setUserId(loggedInUser.id);
+				foodtruckcheck(loggedInUser.id);
+                // setUserId(loggedInUser.id);
+				// foodtruckcheck(loggedInUser.id);
+			}
+		}
+	}, [loginCheck]);
 
     //--Try #3:
 	// useEffect(() => {

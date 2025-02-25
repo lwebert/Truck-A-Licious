@@ -18,31 +18,36 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 //GET foodtrucks by zip code
-router.get('/:zipCode', async (req: Request, res: Response) => {
-	try {
-		const searchZipCode = req.params.zipCode;
-		const foodtruckData = await Foodtruck.findAll({
-			where: { zipCode: searchZipCode },
-			include: [{ model: User }],
-		});
+// router.get('/:zipCode', async (req: Request, res: Response) => {
+// 	try {
+// 		const searchZipCode = req.params.zipCode;
+// 		const foodtruckData = await Foodtruck.findAll({
+// 			where: { zipCode: searchZipCode },
+// 			include: [{ model: User }],
+// 		});
 
-		if (!foodtruckData) {
-			res.status(404).json({
-				message: 'No food trucks found with that zip code!',
-			});
-			return;
-		}
+// 		if (!foodtruckData) {
+// 			res.status(404).json({
+// 				message: 'No food trucks found with that zip code!',
+// 			});
+// 			return;
+// 		}
 
-		res.status(200).json(foodtruckData);
-	} catch (err) {
-		res.status(500).json(err);
-	}
-});
+// 		res.status(200).json(foodtruckData);
+// 	} catch (err) {
+// 		res.status(500).json(err);
+// 	}
+// });
 
 //GET foodtruck for logged in User
 router.get('/:UserId', async (req: Request, res: Response) => {
 	const userId = req.params?.UserId;
+
+	console.log(" router.get ~ userId:", userId);
+
+	
 	if (!userId) {
+		console.log("No userId.")
 		res.status(422).json({
 			message: 'Missing invalid required parameter: UserId',
 			userId,
@@ -52,7 +57,9 @@ router.get('/:UserId', async (req: Request, res: Response) => {
 		const foodTruck = await Foodtruck.findOne({
 			where: { UserId: userId },
 		});
+		console.log("Foodtruck: ", foodTruck)
 		if (!foodTruck) {
+			console.log("No foodTruck")
 			res.status(404).json({ message: 'No food truck found for user.' });
 		}
 		return res.json(foodTruck);
