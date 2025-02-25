@@ -41,11 +41,11 @@ export const signup = async (req: Request, res: Response) => {
 				.json({ message: 'User already exists, please login' });
 		}
 
-		await User.create({ email, username, password });
+		const newUser = await User.create({ email, username, password });
 
 		const secretKey = process.env.JWT_SECRET_KEY || '';
 
-		const token = jwt.sign({ username, email }, secretKey, {
+		const token = jwt.sign({ username, email, id: newUser.id  }, secretKey, {
 			expiresIn: '1h',
 		});
 		return res.json({ token });
