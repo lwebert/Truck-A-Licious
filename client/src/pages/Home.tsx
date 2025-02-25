@@ -14,7 +14,6 @@ const Home = () => {
 	const [users, setUsers] = useState<UserData[]>([]);
 	const [error, setError] = useState<boolean>(false);
 	const [loginCheck, setLoginCheck] = useState<boolean>(false);
-
 	const [hasFoodtruck, setHasFoodtruck] = useState<boolean>(false);
 	const [userId, setUserId] = useState<number | null>(null);
 	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
@@ -60,7 +59,6 @@ const Home = () => {
 	const foodtruckcheck = async (userid: number) => {
 		try {
 			const foodtruckData = await retrieveOwnerFoodtruck(userid);
-
 			console.log('Retreive owner foodtruck data: ', foodtruckData);
 
 			if (!foodtruckData) {
@@ -94,15 +92,25 @@ const Home = () => {
 
 	return (
 		<>
-			{!loginCheck ? (
-				<div className="login-notice">
-					<h1>Foodtrucks coming to your area!</h1>
-					<div>
-						<div>Monday</div>
-						<div>Tuesday</div>
-						<div>Wed</div>
-						<div>Th</div>
-						<div>Fr</div>
+			{
+				!loginCheck ? (
+					<div className="login-notice">
+						<h1 className="hp-Tittle ">Foodtrucks coming to your area!</h1>
+						<div className='hp-container'>
+						<div className='hp-card1'>
+							<h2>Monday</h2>
+								<ul>
+								<li className='hp-card-li'>
+									Matthew's Foodtruck
+									Alices Foodtruck
+									John's Foodtruck
+								</li>
+								</ul>
+							</div>
+						<div className='hp-card2'>Tuesday</div>
+						<div className='hp-card3'>Wednesday</div>
+						<div className='hp-card4'>Thursday</div>
+						<div className='hp-card5'>Friday</div>
 					</div>
 				</div>
 			) : // TODO: Create state and imports
@@ -119,3 +127,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

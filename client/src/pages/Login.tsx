@@ -33,11 +33,11 @@ const Login = () => {
 	};
 
 	return (
-		<div className="center-container">
-			<div className="card">
-				<h1 className="text-center mb-4">Truck-A-Licious</h1>
+		<div className="lp-Container">
+			<div className="lp-card">
+				<h1 className="lp-brand">Truck-A-Licious</h1>
 				<form onSubmit={handleSubmit}>
-					<div className="mb-3">
+					<div className="lp-mb-3">
 						<label htmlFor="username" className="form-label">
 							Username
 						</label>
@@ -50,7 +50,7 @@ const Login = () => {
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="mb-3">
+					<div className="lp-mb-3">
 						<label htmlFor="password" className="form-label">
 							Password
 						</label>
@@ -63,12 +63,12 @@ const Login = () => {
 							onChange={handleChange}
 						/>
 					</div>
-					<div className="d-grid gap-2">
-						<button type="submit" className="btn btn-primary">
+					<div className="lp-mb-4">
+						<button type="submit" className="btn-btn-primary">
 							Login
 						</button>
 					</div>
-					<div className="text-center mt-3">
+					<div className="text-center">
 						<p>
 							Don't have an account? <a href="/signup">Sign Up</a>
 						</p>
