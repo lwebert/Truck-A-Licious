@@ -8,4 +8,5 @@ export default interface FoodtruckData {
 	zipCode: number | null;
 	startDate: Date | null;
 	endDate: Date | null;
+	UserId: number | null;
 }

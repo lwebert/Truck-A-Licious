@@ -47,9 +47,9 @@ export function FoodtruckFactory(sequelize: Sequelize) {
 			menuImg: {
 				type: DataTypes.STRING,
 				allowNull: true,
-				validate: {
-					isUrl: true,
-				},
+				// validate: {
+				// 	isUrl: true,
+				// },
 			},
 			description: {
 				type: DataTypes.STRING,

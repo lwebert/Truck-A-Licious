@@ -62,12 +62,19 @@ const createOwnerFoodtruck = async (
 ): Promise<FoodtruckData> => {
 	console.log('API body: ', body);
 	try {
+		const userid = Auth.getProfile()?.id;
+		console.log("profile: ", Auth.getProfile());
+
+		const fooddata = { ...body, UserId: userid };
+		console.log("Food data:", fooddata);
+
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${Auth.getToken()}`,
 			},
-			body: JSON.stringify(body),
+			body: JSON.stringify(fooddata),
 		});
 
 		// Check for API await response errors before parsing JSON
