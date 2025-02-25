@@ -4,7 +4,6 @@ import { retrieveUsers } from '../api/userAPI';
 import type { UserData } from '../interfaces/UserData';
 import ErrorPage from './ErrorPage';
 import auth from '../utils/auth';
-// import UsersService from '../utils/users';
 
 import FoodtruckForm from '../components/FoodtruckForm';
 import FoodtruckDisplay from '../components/FoodtruckDisplay';
@@ -22,28 +21,13 @@ const Home = () => {
 		undefined
 	);
 
-    // useEffect(() => {
-	// 	if (loginCheck) {
-	// 		fetchUsers();
-	// 	}
-	// }, [loginCheck]);
-
-
-    // Try #2:
 	useEffect(() => {
 		if (loginCheck) {
 			fetchUsers(); //grabs all users, sets to users state variable
 
 			const loggedInUser = auth.getProfile();
-			// if (
-			// 	!loggedInUser ||
-			// 	!loggedInUser.id ||
-			// 	typeof loggedInUser.id === 'number'
-			// ) 
-            console.log(typeof loggedInUser.id)
 
-
-            if (
+			if (
 				!loggedInUser ||
 				!loggedInUser.id ||
 				typeof loggedInUser.id !== 'number'
@@ -53,46 +37,18 @@ const Home = () => {
 			} else {
 				setUserId(loggedInUser.id);
 				foodtruckcheck(loggedInUser.id);
-                // setUserId(loggedInUser.id);
-				// foodtruckcheck(loggedInUser.id);
 			}
 		}
 	}, [loginCheck]);
 
-    //--Try #3:
-	// useEffect(() => {
-	// 	if (loginCheck) {
-	// 		fetchUsers(); //grabs all users, sets to users state variable
-	// 	}
-	// }, [loginCheck]);
-
-	// useEffect(() => {
-	// 	const retrieveUserId = async () => {
-	// 		const userid = await UsersService.getUserIdByUsername();
-	// 		setUserId(userid);
-	// 	};
-	// 	retrieveUserId();
-	// }, []);
-
-	// useEffect(() => {
-	// 	if (userId !== null) {
-	// 		foodtruckcheck(userId);
-	// 	}
-	// }, [userId]);
-
-
-
-
-//TODO: Listen for FoodtruckForm.tsx handleSubmit event here
-    const foodtruckSubmit = () => {
-        setHasFoodtruck(true);
-    }
-
+	//Listens for FoodtruckForm.tsx handleSubmit event here
+	const foodtruckSubmit = () => {
+		setHasFoodtruck(true);
+	};
 
 	useLayoutEffect(() => {
 		checkLogin();
 	}, []);
-
 
 	const checkLogin = () => {
 		if (auth.loggedIn()) {
@@ -125,6 +81,7 @@ const Home = () => {
 		try {
 			const data = await retrieveUsers();
 			setUsers(data);
+			console.log('Users: ', users);
 		} catch (err) {
 			console.error('Failed to retrieve tickets:', err);
 			setError(true);
@@ -135,30 +92,28 @@ const Home = () => {
 		return <ErrorPage />;
 	}
 
-	console.log(users);
-	//TODO: Do all conditional rendering of pages here - including the food truck owners
 	return (
 		<>
-			{
-				!loginCheck ? (
-					<div className="login-notice">
-						<h1>Foodtrucks coming to your area!</h1>
-						<div>
+			{!loginCheck ? (
+				<div className="login-notice">
+					<h1>Foodtrucks coming to your area!</h1>
+					<div>
 						<div>Monday</div>
 						<div>Tuesday</div>
 						<div>Wed</div>
 						<div>Th</div>
 						<div>Fr</div>
 					</div>
-
 				</div>
-				) : // TODO: Create state and imports
-				hasFoodtruck ? (
-					<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
-				) : (
-					<FoodtruckForm userId={userId} foodtruckSubmit={foodtruckSubmit}/>
-				)
-			}
+			) : // TODO: Create state and imports
+			hasFoodtruck ? (
+				<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
+			) : (
+				<FoodtruckForm
+					userId={userId}
+					foodtruckSubmit={foodtruckSubmit}
+				/>
+			)}
 		</>
 	);
 };
