@@ -2,6 +2,17 @@
 
 import FoodtruckData from '../interfaces/FoodtruckData';
 
+import Apiip from 'apiip.net';
+const GeoAPIkey = import.meta.env.GeoAPIkey;
+const apiip = new Apiip(GeoAPIkey);
+
+(async () => {
+  console.log(await apiip.getLocation());
+})();
+
+
+ 
+
 //fetch to api/foodtrucks (GET) - for home page calendar
 const retrieveAllFoodtrucks = async () => { };
 
