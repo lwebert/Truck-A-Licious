@@ -1,7 +1,6 @@
 import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 
-
 interface UserAttributes {
 	id: number;
 	username: string;
@@ -40,15 +39,15 @@ export function UserFactory(sequelize: Sequelize): typeof User {
 			username: {
 				type: DataTypes.STRING,
 				allowNull: false,
-        unique: true,
+				unique: true,
 			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-        }
+				unique: true,
+				validate: {
+					isEmail: true,
+				},
 			},
 			password: {
 				type: DataTypes.STRING,

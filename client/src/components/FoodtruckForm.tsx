@@ -92,11 +92,6 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 		event.preventDefault();
 		console.log(newFoodtruck);
 		if (
-			// newFoodtruck.foodtruckName &&
-			// newFoodtruck.cuisine &&
-			// newFoodtruck.menuImg &&
-			// newFoodtruck.description &&
-			// newFoodtruck.zipCode !== null
 			newFoodtruck
 		) {
 			const data = await createNewFoodtruck(newFoodtruck);
