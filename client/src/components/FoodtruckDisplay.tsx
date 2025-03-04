@@ -33,33 +33,52 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 		return <div>No food truck found.</div>;
 	}
 
-
-	console.log(displayedFoodtruck.startDate, displayedFoodtruck.endDate, typeof displayedFoodtruck.startDate, typeof displayedFoodtruck.endDate)
+	console.log(
+		displayedFoodtruck.startDate,
+		displayedFoodtruck.endDate,
+		typeof displayedFoodtruck.startDate,
+		typeof displayedFoodtruck.endDate
+	);
 	return (
-		<div>
-			<h1>{displayedFoodtruck.foodtruckName}</h1>
-			<p>Cuisine: {displayedFoodtruck.cuisine}</p>
-			<p>Description: {displayedFoodtruck.description}</p>
-			<p>Zip Code: {displayedFoodtruck.zipCode}</p>
-		
-			{displayedFoodtruck.startDate ? (
-				<p>
-					Start Date:
-					{new Date(displayedFoodtruck.startDate).toLocaleDateString()}
+		<div className="foodtruckInfo">
+			<h1 className="foodtruckItem">
+				{displayedFoodtruck.foodtruckName}
+			</h1>
+			<div className="foodtruckDetailContainer">
+				<p className="foodtruckItem">
+					Cuisine: {displayedFoodtruck.cuisine}
 				</p>
-			) : null}
-			{displayedFoodtruck.endDate ? (
-				<p>
-					End Date:{' '}
-					{new Date(displayedFoodtruck.endDate).toLocaleDateString()}
+				<p className="foodtruckItem">
+					Description: {displayedFoodtruck.description}
 				</p>
-			) : null}
-			{displayedFoodtruck.menuImg ? (
-				<img
-					src={displayedFoodtruck?.menuImg}
-					alt={`${displayedFoodtruck.foodtruckName} menu`}
-				/>
-			) : null}
+				<p className="foodtruckItem">
+					Zip Code: {displayedFoodtruck.zipCode}
+				</p>
+
+				{displayedFoodtruck.startDate ? (
+					<p className="foodtruckItem">
+						Start Date:
+						{new Date(
+							displayedFoodtruck.startDate
+						).toLocaleDateString()}
+					</p>
+				) : null}
+				{displayedFoodtruck.endDate ? (
+					<p className="foodtruckItem">
+						End Date:{' '}
+						{new Date(
+							displayedFoodtruck.endDate
+						).toLocaleDateString()}
+					</p>
+				) : null}
+				{displayedFoodtruck.menuImg ? (
+					<img
+						className="foodtruckItem"
+						src={displayedFoodtruck?.menuImg}
+						alt={`${displayedFoodtruck.foodtruckName} menu`}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 };
