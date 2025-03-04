@@ -20,9 +20,10 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-rounded">
-      <div className="container-fluid navbar-nav">
+      {/* <div className="container-fluid navbar-nav"> */}
         <Link className="navbar-brand" to="/">Truck-A-Licious</Link>
-        <div className="collapse navbar-collapse">
+        {/* <div className="collapse navbar-collapse"> */}
+        <div>
           <ul className="navbar-nav ms-auto d-flex align-items-center">
             {showLinksOnPaths.includes(location.pathname) && !loginCheck && (
               <>
@@ -49,7 +50,7 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-      </div>
+      {/* </div> */}
     </nav>
   );
 };
