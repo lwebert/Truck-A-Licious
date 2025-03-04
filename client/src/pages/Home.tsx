@@ -94,24 +94,48 @@ const Home = () => {
 		<>
 			{!loginCheck ? (
 				<div className="login-notice">
-					<h1 className="hp-Tittle ">
+					<h1 className="hp-Title ">
 						Foodtrucks coming to your area!
 					</h1>
 					<div className="hp-container">
 						<div className="hp-card1">
 							<h2>Monday</h2>
-							<ul>
-								<li className="hp-card-li">
-									Matthew's Foodtruck
-								</li>
+							<ul className="">
+								<li className="hp-card-li">Matthew's Foodtruck</li>
 								<li className="hp-card-li">Alices Foodtruck</li>
 								<li className="hp-card-li">John's Foodtruck</li>
 							</ul>
 						</div>
-						<div className="hp-card2">Tuesday</div>
-						<div className="hp-card3">Wednesday</div>
-						<div className="hp-card4">Thursday</div>
-						<div className="hp-card5">Friday</div>
+						<div className="hp-card2">
+						<h2>Tuesday</h2>
+							<ul>
+								<li className="hp-card-li">Mimi's Comfort Food</li>
+								<li className="hp-card-li">Bob's Foodtruck</li>
+							</ul>
+						</div>
+						<div className="hp-card3">
+						<h2>Wednesday</h2>
+							<ul>
+								<li className="hp-card-li">Adams Appetizers</li>
+								<li className="hp-card-li">John's Foodtruck</li>
+								<li className="hp-card-li">Miya Moon</li>
+							</ul>
+						</div>
+						<div className="hp-card4">
+						<h2>Thursday</h2>
+							<ul>
+								<li className="hp-card-li">Taco's Locos</li>
+								<li className="hp-card-li">Alice's Foodtruck</li>
+								<li className="hp-card-li">Sam's Spaghetti Truck</li>
+							</ul>
+						</div>
+						<div className="hp-card5">
+						<h2>Friday</h2>
+							<ul>
+								<li className="hp-card-li">El Jefe</li>
+								<li className="hp-card-li">Jims's Jimmies</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			) : hasFoodtruck ? (

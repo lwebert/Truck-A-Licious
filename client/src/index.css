@@ -19,6 +19,7 @@
  */
 body {
   margin: 0;
+  
 }
 
 /**
@@ -369,7 +370,9 @@ END NORMALIZE CSS
 }
 
 .navbar-brand {
-  color: #FF699D;
+  display: flex;
+  justify-content: flex-start;
+  color: #c8507a;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -507,31 +510,32 @@ END NORMALIZE CSS
 /*=================*/
 /* home page */
 
-.hp-Tittle {
+.hp-Title {
   font-size: 2em;
-  color: #FF699D;
+  color: #3e3b3e;
   text-align: center;
   margin-top: 30px;
 }
 
 .hp-container {
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
-  height: 100vh;
+  height: 40vh;
   color: white;
   gap: 12px;
-  margin-top: -100px;
+  margin-top: -50px;
 }
 
 .hp-card-li {
-  list-style-type: none; 
   font-size: 1rem; 
   color: white; 
-  text-align: center; 
+  text-align: start; 
   padding: 0; 
-  margin: 1rem 0; 
+  margin: 5px; 
+  list-style-type:circle;
 }
+
 
 
 .hp-card1 {
