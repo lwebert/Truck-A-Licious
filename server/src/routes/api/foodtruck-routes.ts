@@ -57,7 +57,7 @@ router.get('/:UserId', async (req: Request, res: Response) => {
 		const foodTruck = await Foodtruck.findOne({
 			where: { UserId: userId },
 		});
-		console.log("Foodtruck: ", foodTruck)
+		// console.log("Foodtruck: ", foodTruck)
 		if (!foodTruck) {
 			console.log("No foodTruck")
 			return res.status(404).json({ message: 'No food truck found for user.' });
