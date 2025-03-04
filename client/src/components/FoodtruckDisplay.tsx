@@ -33,6 +33,8 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 		return <div>No food truck found.</div>;
 	}
 
+
+	console.log(displayedFoodtruck.startDate, displayedFoodtruck.endDate, typeof displayedFoodtruck.startDate, typeof displayedFoodtruck.endDate)
 	return (
 		<div>
 			<h1>{displayedFoodtruck.foodtruckName}</h1>
@@ -40,18 +42,18 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 			<p>Description: {displayedFoodtruck.description}</p>
 			<p>Zip Code: {displayedFoodtruck.zipCode}</p>
 		
-			{/* {displayedFoodtruck.startDate ? (
+			{displayedFoodtruck.startDate ? (
 				<p>
-					Start Date:{' '}
-					{displayedFoodtruck.startDate}
+					Start Date:
+					{new Date(displayedFoodtruck.startDate).toLocaleDateString()}
 				</p>
 			) : null}
 			{displayedFoodtruck.endDate ? (
 				<p>
-					Start Date:{' '}
-					{displayedFoodtruck.endDate}
+					End Date:{' '}
+					{new Date(displayedFoodtruck.endDate).toLocaleDateString()}
 				</p>
-			) : null} */}
+			) : null}
 			{displayedFoodtruck.menuImg ? (
 				<img
 					src={displayedFoodtruck?.menuImg}
