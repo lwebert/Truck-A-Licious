@@ -497,6 +497,12 @@ END NORMALIZE CSS
 
 }
 
+#formsubmit li {
+  list-style-type: none;
+  margin: 5px;
+
+}
+
 /* register page */
 /*=================*/
 /* home page */
