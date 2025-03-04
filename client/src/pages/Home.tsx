@@ -92,27 +92,29 @@ const Home = () => {
 
 	return (
 		<>
-			{
-				!loginCheck ? (
-					<div className="login-notice">
-						<h1 className="hp-Tittle ">Foodtrucks coming to your area!</h1>
-						<div className='hp-container'>
-						<div className='hp-card1'>
+			{!loginCheck ? (
+				<div className="login-notice">
+					<h1 className="hp-Tittle ">
+						Foodtrucks coming to your area!
+					</h1>
+					<div className="hp-container">
+						<div className="hp-card1">
 							<h2>Monday</h2>
-								<ul>
-								<li className='hp-card-li'>Matthew's Foodtruck</li>
-								<li className='hp-card-li'>Alices Foodtruck</li>
-								<li className='hp-card-li'>John's Foodtruck</li>
-								</ul>
-							</div>
-						<div className='hp-card2'>Tuesday</div>
-						<div className='hp-card3'>Wednesday</div>
-						<div className='hp-card4'>Thursday</div>
-						<div className='hp-card5'>Friday</div>
+							<ul>
+								<li className="hp-card-li">
+									Matthew's Foodtruck
+								</li>
+								<li className="hp-card-li">Alices Foodtruck</li>
+								<li className="hp-card-li">John's Foodtruck</li>
+							</ul>
+						</div>
+						<div className="hp-card2">Tuesday</div>
+						<div className="hp-card3">Wednesday</div>
+						<div className="hp-card4">Thursday</div>
+						<div className="hp-card5">Friday</div>
 					</div>
 				</div>
-			) : // TODO: Create state and imports
-			hasFoodtruck ? (
+			) : hasFoodtruck ? (
 				<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
 			) : (
 				<FoodtruckForm
@@ -125,5 +127,3 @@ const Home = () => {
 };
 
 export default Home;
-
-

@@ -91,9 +91,7 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
 		console.log(newFoodtruck);
-		if (
-			newFoodtruck
-		) {
+		if (newFoodtruck) {
 			const data = await createNewFoodtruck(newFoodtruck);
 			foodtruckSubmit();
 			console.log('Foodtruck created: ', data);
@@ -105,7 +103,7 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 	return (
 		<div>
 			<h1>Add New Foodtruck</h1>
-			<ul id='formsubmit'>
+			<ul id="formsubmit">
 				<form onSubmit={handleSubmit}>
 					<li>
 						<label>Foodtruck Name:</label>
@@ -179,7 +177,9 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 							type="date"
 							value={
 								newFoodtruck.startDate
-									? newFoodtruck.startDate.toISOString().split('T')[0]
+									? newFoodtruck.startDate
+											.toISOString()
+											.split('T')[0]
 									: ''
 							}
 							onChange={(event) => {
@@ -193,7 +193,9 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 							type="date"
 							value={
 								newFoodtruck.endDate
-									? newFoodtruck.endDate.toISOString().split('T')[0]
+									? newFoodtruck.endDate
+											.toISOString()
+											.split('T')[0]
 									: ''
 							}
 							onChange={(event) => {

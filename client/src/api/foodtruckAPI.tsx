@@ -2,7 +2,7 @@
 
 import FoodtruckData from '../interfaces/FoodtruckData';
 import Auth from '../utils/auth';
- 
+
 //TODO: fetch to api/foodtrucks (GET) - for home page calendar
 const retrieveAllFoodtrucks = async () => {};
 
@@ -63,10 +63,10 @@ const createOwnerFoodtruck = async (
 	console.log('API body: ', body);
 	try {
 		const userid = Auth.getProfile()?.id;
-		console.log("profile: ", Auth.getProfile());
+		console.log('profile: ', Auth.getProfile());
 
 		const fooddata = { ...body, UserId: userid };
-		console.log("Food data:", fooddata);
+		console.log('Food data:', fooddata);
 
 		const response = await fetch('/api/foodtrucks/', {
 			method: 'POST',

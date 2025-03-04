@@ -1,4 +1,3 @@
-// import { useState, FormEvent } from 'react';
 import { useState, useEffect } from 'react';
 import FoodtruckData from '../interfaces/FoodtruckData';
 import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
@@ -34,7 +33,6 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 		return <div>No food truck found.</div>;
 	}
 
-	//TODO: fix display :)
 	return (
 		<div>
 			<h1>{displayedFoodtruck.foodtruckName}</h1>
@@ -45,11 +43,12 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 				Start Date: {displayedFoodtruck.startDate?.toLocaleDateString()}
 			</p>
 			<p>End Date: {displayedFoodtruck.endDate?.toLocaleDateString()}</p>
-			<img
-				src={displayedFoodtruck?.menuImg}
-				alt={`${displayedFoodtruck.foodtruckName} menu`}
-			/>
-
+			{displayedFoodtruck.menuImg ? (
+				<img
+					src={displayedFoodtruck?.menuImg}
+					alt={`${displayedFoodtruck.foodtruckName} menu`}
+				/>
+			) : null}
 		</div>
 	);
 };
