@@ -105,92 +105,106 @@ const FoodtruckForm: React.FC<FoodtruckFormProps> = ({
 	return (
 		<div>
 			<h1>Add New Foodtruck</h1>
-			<form onSubmit={handleSubmit}>
-				<label>Foodtruck Name: </label>
-				<input
-					value={newFoodtruck?.foodtruckName || ''}
-					onChange={(event) => {
-						handleChange(event);
-					}}
-					type="text"
-					name="foodtruckName"
-				/>
+			<ul id='formsubmit'>
+				<form onSubmit={handleSubmit}>
+					<li>
+						<label>Foodtruck Name:</label>
+						<input
+							value={newFoodtruck?.foodtruckName || ''}
+							onChange={(event) => {
+								handleChange(event);
+							}}
+							type="text"
+							name="foodtruckName"
+						/>
+					</li>
 
-				<label>Foodtruck Description: </label>
-				<input
-					value={newFoodtruck?.description || ''}
-					onChange={handleChange}
-					type="text"
-					name="description"
-				/>
+					<li>
+						<label>Foodtruck Description: </label>
+						<input
+							value={newFoodtruck?.description || ''}
+							onChange={handleChange}
+							type="text"
+							name="description"
+						/>
+					</li>
 
-				<label>Cuisine: </label>
-				<input
-					list="cuisines"
-					value={newFoodtruck?.cuisine || ''}
-					onChange={handleChange}
-					name="cuisine"
-				/>
-				<datalist id="cuisines">
-					<option value="italian">Italian</option>
-					<option value="japanese">Japanese</option>
-					<option value="thai">Thai</option>
-					<option value="mexican">Mexican</option>
-					<option value="american">American</option>
-					<option value="greek">Greek</option>
-					<option value="fusion">Fusion</option>
-				</datalist>
+					<li>
+						<label>Cuisine: </label>
+						<input
+							list="cuisines"
+							value={newFoodtruck?.cuisine || ''}
+							onChange={handleChange}
+							name="cuisine"
+						/>
+						<datalist id="cuisines">
+							<option value="italian">Italian</option>
+							<option value="japanese">Japanese</option>
+							<option value="thai">Thai</option>
+							<option value="mexican">Mexican</option>
+							<option value="american">American</option>
+							<option value="greek">Greek</option>
+							<option value="fusion">Fusion</option>
+						</datalist>
+					</li>
 
-				<label>Select an image of your menu: </label>
-				<input
-					type="file"
-					id="menufile"
-					onChange={handleFileChange}
-					name="menuImg"
-				/>
+					<li>
+						<label>Select an image of your menu: </label>
+						<input
+							type="file"
+							id="menufile"
+							onChange={handleFileChange}
+							name="menuImg"
+						/>
+					</li>
 
-				<label>Zip Code: </label>
-				<input
-					type="text"
-					value={
-						newFoodtruck?.zipCode !== null
-							? newFoodtruck.zipCode
-							: ''
-					}
-					onChange={handleChange}
-					name="zipCode"
-				/>
+					<li>
+						<label>Zip Code: </label>
+						<input
+							type="text"
+							value={
+								newFoodtruck?.zipCode !== null
+									? newFoodtruck.zipCode
+									: ''
+							}
+							onChange={handleChange}
+							name="zipCode"
+						/>
+					</li>
 
-				<label>Start Date: </label>
-				<input
-					name="startDate"
-					type="date"
-					value={
-						newFoodtruck.startDate
-							? newFoodtruck.startDate.toISOString().split('T')[0]
-							: ''
-					}
-					onChange={(event) => {
-						handleDateChange(event, 'startDate');
-					}}
-				/>
+					<li>
+						<label>Start Date: </label>
+						<input
+							name="startDate"
+							type="date"
+							value={
+								newFoodtruck.startDate
+									? newFoodtruck.startDate.toISOString().split('T')[0]
+									: ''
+							}
+							onChange={(event) => {
+								handleDateChange(event, 'startDate');
+							}}
+						/>
 
-				<label>End Date: </label>
-				<input
-					name="endDate"
-					type="date"
-					value={
-						newFoodtruck.endDate
-							? newFoodtruck.endDate.toISOString().split('T')[0]
-							: ''
-					}
-					onChange={(event) => {
-						handleDateChange(event, 'endDate');
-					}}
-				/>
+						<label>End Date: </label>
+						<input
+							name="endDate"
+							type="date"
+							value={
+								newFoodtruck.endDate
+									? newFoodtruck.endDate.toISOString().split('T')[0]
+									: ''
+							}
+							onChange={(event) => {
+								handleDateChange(event, 'endDate');
+							}}
+						/>
+					</li>
 
-				<button type="submit">Create Foodtruck</button>
-			</form>
+					<button type="submit">Create Foodtruck</button>
+				</form>
+			</ul>
 		</div>
 	);
 };
