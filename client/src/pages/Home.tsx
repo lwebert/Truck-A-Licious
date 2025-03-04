@@ -4,6 +4,7 @@ import { retrieveUsers } from '../api/userAPI';
 import type { UserData } from '../interfaces/UserData';
 import ErrorPage from './ErrorPage';
 import auth from '../utils/auth';
+
 import FoodtruckForm from '../components/FoodtruckForm';
 import FoodtruckDisplay from '../components/FoodtruckDisplay';
 import { retrieveOwnerFoodtruck } from '../api/foodtruckAPI';
@@ -18,74 +19,35 @@ const Home = () => {
 	const [foodTruck, setFoodtruck] = useState<FoodtruckData | undefined>(
 		undefined
 	);
-    useEffect(() => {
+
+	useEffect(() => {
 		if (loginCheck) {
-			fetchUsers();
+			fetchUsers(); //grabs all users, sets to users state variable
+
+			const loggedInUser = auth.getProfile();
+
+			if (
+				!loggedInUser ||
+				!loggedInUser.id ||
+				typeof loggedInUser.id !== 'number'
+			) {
+				console.error('Error retrieving logged in user information');
+				return;
+			} else {
+				setUserId(loggedInUser.id);
+				foodtruckcheck(loggedInUser.id);
+			}
 		}
 	}, [loginCheck]);
 
-
-    //Try #2:
-	// useEffect(() => {
-	// 	if (loginCheck) {
-	// 		fetchUsers(); //grabs all users, sets to users state variable
-
-	// 		const loggedInUser = auth.getProfile();
-	// 		// if (
-	// 		// 	!loggedInUser ||
-	// 		// 	!loggedInUser.id ||
-	// 		// 	typeof loggedInUser.id === 'number'
-	// 		// ) 
-    //         if (
-	// 			!loggedInUser ||
-	// 			!loggedInUser.username ||
-	// 			typeof loggedInUser.username === 'string'
-	// 		) {
-	// 			console.error('Error retrieving logged in user information');
-	// 			return;
-	// 		} else {
-	// 			setUserId(loggedInUser.username);
-	// 			foodtruckcheck(loggedInUser.username);
-    //             // setUserId(loggedInUser.id);
-	// 			// foodtruckcheck(loggedInUser.id);
-	// 		}
-	// 	}
-	// }, [loginCheck]);
-
-    //--Try #3:
-	// useEffect(() => {
-	// 	if (loginCheck) {
-	// 		fetchUsers(); //grabs all users, sets to users state variable
-	// 	}
-	// }, [loginCheck]);
-
-	// useEffect(() => {
-	// 	const retrieveUserId = async () => {
-	// 		const userid = await UsersService.getUserIdByUsername();
-	// 		setUserId(userid);
-	// 	};
-	// 	retrieveUserId();
-	// }, []);
-
-	// useEffect(() => {
-	// 	if (userId !== null) {
-	// 		foodtruckcheck(userId);
-	// 	}
-	// }, [userId]);
-
-
-
-
-//TODO: Listen for FoodtruckForm.tsx handleSubmit event here
-    const foodtruckSubmit = () => {
-        setHasFoodtruck(true);
-    }
-
+	//Listens for FoodtruckForm.tsx handleSubmit event here
+	const foodtruckSubmit = () => {
+		setHasFoodtruck(true);
+	};
 
 	useLayoutEffect(() => {
 		checkLogin();
 	}, []);
-
 
 	const checkLogin = () => {
 		if (auth.loggedIn()) {
@@ -117,6 +79,7 @@ const Home = () => {
 		try {
 			const data = await retrieveUsers();
 			setUsers(data);
+			console.log('Users: ', users);
 		} catch (err) {
 			console.error('Failed to retrieve tickets:', err);
 			setError(true);
@@ -127,8 +90,6 @@ const Home = () => {
 		return <ErrorPage />;
 	}
 
-	console.log(users);
-	//TODO: Do all conditional rendering of pages here - including the food truck owners
 	return (
 		<>
 			{
@@ -149,15 +110,16 @@ const Home = () => {
 						<div className='hp-card4'>Thursday</div>
 						<div className='hp-card5'>Friday</div>
 					</div>
-
 				</div>
-				) : // TODO: Create state and imports
-				hasFoodtruck ? (
-					<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
-				) : (
-					<FoodtruckForm userId={userId} foodtruckSubmit={foodtruckSubmit}/>
-				)
-			}
+			) : // TODO: Create state and imports
+			hasFoodtruck ? (
+				<FoodtruckDisplay userId={userId} foodTruck={foodTruck} />
+			) : (
+				<FoodtruckForm
+					userId={userId}
+					foodtruckSubmit={foodtruckSubmit}
+				/>
+			)}
 		</>
 	);
 };

@@ -50,9 +50,9 @@ const FoodtruckDisplay: React.FC<FoodtruckDisplayProps> = ({
 				src={displayedFoodtruck?.menuImg}
 				alt={`${displayedFoodtruck.foodtruckName} menu`}
 			/>
+
 		</div>
 	);
 };
 
 export default FoodtruckDisplay;
-
