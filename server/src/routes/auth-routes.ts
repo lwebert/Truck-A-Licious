@@ -13,8 +13,6 @@ export const login = async (req: Request, res: Response) => {
 		return res.status(401).json({ message: 'Authentication failed' });
 	}
 
-	console.log('User: ', user);
-
 	const passwordIsValid = await bcrypt.compare(password, user.password);
 	if (!passwordIsValid) {
 		return res.status(401).json({ message: 'Authentication failed' });
